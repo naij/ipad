@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: wolongxzg
+    framework:
+      name: node
+      info:
+        mem: 256M
+        description: Node.js Application
+        exec: 
+    infra: ap-aws
+    url: ${name}.${target-base}
+    mem: 256M
+    instances: 1
+    services:
+      nodeblog:
+        type: mongodb

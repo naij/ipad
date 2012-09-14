@@ -1,0 +1,29 @@
+<div class="layout">
+    <div class="col-main">
+        <ul class="article-list">
+            <% for (var i = 0, l = article.length; i < l; i++) { %>
+            <li class="list-item">
+                <div class="hd">
+                    <h3 class="title">
+                        <a href="article/<%= article[i]._id %>" target="_blank"><%= article[i].title %></a>
+                    </h3>
+                    <p class="publish"><%= article[i].publishDate %></p>
+                </div>
+                <div class="bd">
+                    <%- article[i].content %>
+                </div>
+                <div class="ft">
+                    <a href="/tag/<%= article[i].tag %>" class="tag">#<%= article[i].tag %></a>
+                    <% if (locals.current_user) { %>
+                    <div class="edit">
+                        <a href="articleedit/<%= article[i]._id %>">编辑</a>
+                        <a href="articledel/<%= article[i]._id %>">删除</a>
+                    </div>
+                    <% } %>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    <div class="col-sub side-bar"><%- partial('sidebar') %></div>
+</div>
