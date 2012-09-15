@@ -1,29 +1,70 @@
-<div class="layout">
-    <div class="col-main">
-        <ul class="article-list">
-            <% for (var i = 0, l = article.length; i < l; i++) { %>
-            <li class="list-item">
-                <div class="hd">
-                    <h3 class="title">
-                        <a href="article/<%= article[i]._id %>" target="_blank"><%= article[i].title %></a>
-                    </h3>
-                    <p class="publish"><%= article[i].publishDate %></p>
-                </div>
-                <div class="bd">
-                    <%- article[i].content %>
-                </div>
-                <div class="ft">
-                    <a href="/tag/<%= article[i].tag %>" class="tag">#<%= article[i].tag %></a>
-                    <% if (locals.current_user) { %>
-                    <div class="edit">
-                        <a href="articleedit/<%= article[i]._id %>">编辑</a>
-                        <a href="articledel/<%= article[i]._id %>">删除</a>
-                    </div>
-                    <% } %>
-                </div>
-            </li>
-            <% } %>
-        </ul>
-    </div>
-    <div class="col-sub side-bar"><%- partial('sidebar') %></div>
-</div>
+<!DOCTYPE html> 
+<html> 
+    <head>
+        <meta charset="utf-8" />
+        <meta name='description' content='<%= config.description %>'>
+        <title><%= config.name %></title>
+        <link rel="stylesheet" href="/assets/css/reset.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <script src="/libs/jquery-1.7.2.min.js"></script>
+        <script src="/libs/underscore-min.js"></script>
+        <script src="/libs/backbone.js"></script>
+        <script src="/libs/sea.js" data-main="./boot/index"></script>
+    </head>
+    <body>
+        <h1 style="font-size:36px;"><a href="#!/hello"><%= config.name %></a></h1>
+
+        <script type="text/javascript">
+            // var App = {  
+            //     Models: {},  
+            //     Views: {},  
+            //     Controllers: {},  
+            //     Collections: {},  
+            //     initialize: function() {  
+            //         new App.Controllers.Routes();  
+            //         Backbone.history.start()
+            //     }
+            // };
+
+            // App.Models.Hello = Backbone.Model.extend({  
+            //     url: function() {  
+            //         return '/api.php';
+            //     }, 
+
+            //     initialize: function() {  
+            //         this.set({'msg':'hello world'});
+            //     }  
+            // }); 
+
+            // App.Views.Hello = Backbone.View.extend({  
+            //     el: $("body"), 
+
+            //     initialize: function(options){  
+            //         this.options = options;  
+            //         this.bind('change', this.render);  
+            //         this.model = this.options.model;  
+            //     }, 
+
+            //     render: function(){ 
+            //         $(this.el).append('<div>'+this.model.msg+'</div>');  
+            //         return this  
+            //     }  
+            // });  
+
+            // App.Controllers.Routes = Backbone.Router.extend({  
+            //     routes: {  
+            //         "!/hello" : "hello",
+            //     },  
+
+            //     hello : function() {
+            //         var helloModel = new App.Models.Hello;  
+                     
+            //         var helloView = new App.Views.Hello({model: {'msg':"ipad"}});  
+            //         helloView.trigger('change'); 
+            //     }
+            // });  
+
+            // App.initialize();  
+        </script>
+    </body>
+</html> 

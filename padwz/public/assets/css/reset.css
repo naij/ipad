@@ -10,7 +10,7 @@ th, td /* table elements 表格元素 */ {
 
 /** 设置默认字体 **/
 body,
-button, input, select, textarea /* for ie */ {font: 12px/1.5 tahoma, arial, "Microsoft Yahei", sans-serif;}
+button, input, select, textarea /* for ie */ {font: 12px/1.5 tahoma, arial, sans-serif;}
 h1, h2, h3, h4, h5, h6 { font-size: 100%; }
 address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
 code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */

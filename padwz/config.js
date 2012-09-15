@@ -6,8 +6,8 @@ var path = require('path');
 
 exports.config = {
     debug: true,
-    name: '记事本',
-    description: 'My Blog',
+    name: 'Pad导航',
+    description: 'ipad 网址导航',
     version: '0.1',
 
     //配置mongodb 线上环境和本地环境
@@ -41,8 +41,8 @@ exports.config = {
 
         return generate_mongo_url(mongo);
     },
-    session_secret: 'node_blog',
-  	auth_cookie_name: 'node_blog',
+    session_secret: 'ipad',
+  	auth_cookie_name: 'ipad',
 
   	// admin 管理员权限
   	admins: { admin: true }

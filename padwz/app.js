@@ -15,7 +15,7 @@ app.configure(function(){
     app.set('views', __dirname + '/views');
     app.set('view engine', 'html');
     app.register('.html', ejs);
-    //app.set('view options', {layout: false});
+    app.set('view options', {layout: false});
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));
@@ -25,7 +25,7 @@ app.configure(function(){
     }));
 
     // custom middleware
-    app.use(require('./controllers/sign').auth_user);
+    //app.use(require('./controllers/sign').auth_user);
 
     app.use(app.router);
 });
@@ -46,7 +46,7 @@ app.helpers({
 // Routes
 routes(app);
 
-app.listen(3000);
+app.listen(3000,'192.168.1.101');
 
 //console.log(env);
 //console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

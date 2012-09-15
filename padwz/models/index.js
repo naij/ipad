@@ -13,8 +13,6 @@ mongoose.connect(db, function (err) {
 });
 
 // models
-require('./article');
 require('./user');
 
-exports.Article = mongoose.model('article');
 exports.User = mongoose.model('User');
