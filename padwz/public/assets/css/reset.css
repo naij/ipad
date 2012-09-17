@@ -10,7 +10,7 @@ th, td /* table elements 表格元素 */ {
 
 /** 设置默认字体 **/
 body,
-button, input, select, textarea /* for ie */ {font: 12px/1.5 tahoma, arial, sans-serif;}
+button, input, select, textarea /* for ie */ {font: 12px/1.5 Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;}
 h1, h2, h3, h4, h5, h6 { font-size: 100%; }
 address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
 code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
@@ -20,7 +20,7 @@ small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正�
 ul, ol, dl { list-style: none; }
 
 /** 重置文本格式元素 **/
-a { text-decoration: none;color:#FFF; }
+a { text-decoration: none;color:#fff; }
 a:hover { text-decoration: none;color:#F88011; }
 
 sup { vertical-align: text-top; } /* 重置，减少对行高的影响 */
@@ -53,5 +53,5 @@ table { border-collapse: collapse; border-spacing: 0; }
 .ks-invisible { visibility: hidden; }
 
 /* 清除浮动 */
-.ks-clear:after { content: '\20'; display: block; height: 0; clear: both; }
-.ks-clear { *zoom: 1; }
+.clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+.clearfix { *zoom: 1; }

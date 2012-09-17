@@ -1,7 +1,10 @@
-define(function(require, exports, module) {
+seajs.config({
+  	preload: ['seajs/plugin-text']
+});
 
-    var Router = require('../app/router/index');
-    new Router();
+seajs.use(['/app/router/index'], function(Router) {
+
+	new Router();
 
     // 启动程序
     Backbone.history.start();

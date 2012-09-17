@@ -6,65 +6,10 @@
         <title><%= config.name %></title>
         <link rel="stylesheet" href="/assets/css/reset.css">
         <link rel="stylesheet" href="/assets/css/style.css">
-        <script src="/libs/jquery-1.7.2.min.js"></script>
-        <script src="/libs/underscore-min.js"></script>
-        <script src="/libs/backbone.js"></script>
-        <script src="/libs/sea.js" data-main="./boot/index"></script>
+        <script src="/libs/jquery/jquery-1.7.2.min.js"></script>
+        <script src="/libs/underscore/underscore-min.js"></script>
+        <script src="/libs/backbone/backbone.js"></script>
+        <script src="/libs/seajs/sea.js" data-main="/boot/index.js"></script>
     </head>
-    <body>
-        <h1 style="font-size:36px;"><a href="#!/hello"><%= config.name %></a></h1>
-
-        <script type="text/javascript">
-            // var App = {  
-            //     Models: {},  
-            //     Views: {},  
-            //     Controllers: {},  
-            //     Collections: {},  
-            //     initialize: function() {  
-            //         new App.Controllers.Routes();  
-            //         Backbone.history.start()
-            //     }
-            // };
-
-            // App.Models.Hello = Backbone.Model.extend({  
-            //     url: function() {  
-            //         return '/api.php';
-            //     }, 
-
-            //     initialize: function() {  
-            //         this.set({'msg':'hello world'});
-            //     }  
-            // }); 
-
-            // App.Views.Hello = Backbone.View.extend({  
-            //     el: $("body"), 
-
-            //     initialize: function(options){  
-            //         this.options = options;  
-            //         this.bind('change', this.render);  
-            //         this.model = this.options.model;  
-            //     }, 
-
-            //     render: function(){ 
-            //         $(this.el).append('<div>'+this.model.msg+'</div>');  
-            //         return this  
-            //     }  
-            // });  
-
-            // App.Controllers.Routes = Backbone.Router.extend({  
-            //     routes: {  
-            //         "!/hello" : "hello",
-            //     },  
-
-            //     hello : function() {
-            //         var helloModel = new App.Models.Hello;  
-                     
-            //         var helloView = new App.Views.Hello({model: {'msg':"ipad"}});  
-            //         helloView.trigger('change'); 
-            //     }
-            // });  
-
-            // App.initialize();  
-        </script>
-    </body>
+    <body></body>
 </html> 

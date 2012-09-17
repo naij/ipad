@@ -1,11 +1,11 @@
 define(function(require, exports, module) {
 
-    var headerViewTemplate = require('./header.html#');
+    var contentViewTemplate = require('./content.html#');
 
-    var headerView = Backbone.View.extend({  
+    var contentView = Backbone.View.extend({  
         el: $("body"),
 
-        template: _.template(headerViewTemplate),
+        template: _.template(contentViewTemplate),
 
         initialize: function(options){
             this.render();  
@@ -17,5 +17,5 @@ define(function(require, exports, module) {
         }  
     });
 
-    return headerView;
+    return contentView;
 });

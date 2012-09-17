@@ -1,20 +1,32 @@
 define(function(require, exports, module) {
 
-    var HeaderView = require('../views/header');
-
     var AppRouter = Backbone.Router.extend({
         routes: {
             "" : "index",
-            "!/hello" : "hello"
+            "!/app" : "app",
+            "!/search" : "search"
         },
 
         index : function(){
+            var HeaderView = require('../views/header.js#');
+            var headerView = new HeaderView();
 
+            var ContentView = require('../views/content.js#');
+            var contentView = new ContentView();
+
+            var SidebarView = require('../views/sidebar.js#');
+            var sidebarView = new SidebarView();
+
+            var SiterView = require('../views/site.js#');
+            var siterView = new SiterView();
         },
 
-        hello : function() {
-            var headerView = new HeaderView({model: {'msg':"ipad"}});  
-            headerView.trigger('change');
+        app : function() {
+            
+        },
+
+        search : function(){
+
         }
     });
 
