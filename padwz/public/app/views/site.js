@@ -37,7 +37,7 @@ define(function(require, exports, module) {
             var panel = $(this.el).find('.panel');
             var width = panel.width();
 
-            siteBd.css('left','-' + width + 'px');
+            //siteBd.css('left','-' + width + 'px');
             //siteBd.animate({left: '-800px'}, 500, 'ease-out');
         },
 
