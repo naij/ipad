@@ -8,8 +8,8 @@ define(function(require, exports, module) {
         template: _.template(siteViewTemplate),
 
         events: { 
-            'swipeLeft .site': 'swipeLeft' ,
-            'swipeRight .site': 'swipeRight'
+            'swipeLeft .main' : 'swipeLeft',
+            'swipeRight .main' : 'swipeRight'
         },
 
         initialize: function(options){
@@ -28,26 +28,22 @@ define(function(require, exports, module) {
             site.css({'width':width + 'px','height':height +'px'});
             panel.css('width',width + 'px');
             siteBd.css('width',width*2 + 'px');
-
-            return this;  
         },
 
-        swipeLeft : function(){
+        swipeLeft : function(e){
             var siteBd = $(this.el).find('.site-bd');
             var panel = $(this.el).find('.panel');
             var width = panel.width();
 
-            //siteBd.css('left','-' + width + 'px');
-            //siteBd.animate({left: '-800px'}, 500, 'ease-out');
+            siteBd.anim({translateX: '-'+ width +'px'}, 0.45, 'cubic-bezier(0, 0, 0.1, 1.0)');
         },
 
-        swipeRight : function(){
+        swipeRight : function(e){
             var siteBd = $(this.el).find('.site-bd');
             var panel = $(this.el).find('.panel');
             var width = panel.width();
 
-            siteBd.css('left','0px');
-            //siteBd.animate({left: width + 'px'}, 500, 'ease-out');
+            siteBd.anim({translateX: '0px'}, 0.45, 'cubic-bezier(0, 0, 0.1, 1.0)');
         }  
     });
 
