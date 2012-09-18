@@ -8,25 +8,27 @@ define(function(require, exports, module) {
         },
 
         index : function(){
-            var HeaderView = require('../views/header.js#');
-            var headerView = new HeaderView();
-
-            var ContentView = require('../views/content.js#');
-            var contentView = new ContentView();
-
             var SidebarView = require('../views/sidebar.js#');
             var sidebarView = new SidebarView();
 
-            var SiterView = require('../views/site.js#');
-            var siterView = new SiterView();
+            var SiteView = require('../views/site.js#');
+            var siteView = new SiteView();
         },
 
         app : function() {
-            
+            var SidebarView = require('../views/sidebar.js#');
+            var sidebarView = new SidebarView();
+
+            var AppView = require('../views/app.js#');
+            var appView = new AppView();
         },
 
         search : function(){
+            var SidebarView = require('../views/sidebar.js#');
+            var sidebarView = new SidebarView();
 
+            var SearchView = require('../views/search.js#');
+            var searchView = new SearchView();
         }
     });
 

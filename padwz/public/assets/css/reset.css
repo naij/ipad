@@ -21,7 +21,7 @@ ul, ol, dl { list-style: none; }
 
 /** 重置文本格式元素 **/
 a { text-decoration: none;color:#fff; }
-a:hover { text-decoration: none;color:#F88011; }
+a:hover { text-decoration: none;color:#fff;}
 
 sup { vertical-align: text-top; } /* 重置，减少对行高的影响 */
 sub { vertical-align: text-bottom; }
@@ -54,4 +54,3 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 /* 清除浮动 */
 .clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
-.clearfix { *zoom: 1; }

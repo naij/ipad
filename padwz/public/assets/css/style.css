@@ -57,6 +57,10 @@ html,body{height: 100%;}
     padding-top:35px;
     text-align:center;
 }
+.side-bar li a:active{
+    background:none;
+
+}
 .side-bar li .iconfont{
     font-size:28px;
     position:absolute;
@@ -70,11 +74,17 @@ html,body{height: 100%;}
 }
 
 .site{
-    padding:20px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.site .site-bd{
+    position: absolute;
 }
 
 .site .hd{
     height:44px;
+    margin-top:20px;
     position:relative;
 }
 
@@ -83,6 +93,10 @@ html,body{height: 100%;}
     position: absolute;
     right:20px;
     top:0;
+}
+
+.site .panel{
+    float:left;
 }
 
 .site .bd li{

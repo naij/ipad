@@ -12,8 +12,11 @@ define(function(require, exports, module) {
         }, 
 
         render: function(){
-            $(this.el).append(this.template());
-            return this;  
+            var hash = location.hash;
+            var path = hash.substring(2);
+
+            $(this.el).html(this.template({path:path}));
+            return this;
         }  
     });
 
