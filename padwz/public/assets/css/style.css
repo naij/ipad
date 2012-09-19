@@ -69,17 +69,14 @@ html,body{height: 100%;}
 }
 
 .main{
+    box-sizing : border-box;
+    height: 100%;
     padding-left: 65px;
     padding-top: 50px;
 }
 
 .site{
-    overflow: hidden;
-    position: relative;
-}
-
-.site .site-bd{
-    /*position: absolute;*/
+    height: 100%;
 }
 
 .site .hd{
@@ -93,10 +90,6 @@ html,body{height: 100%;}
     position: absolute;
     right:20px;
     top:0;
-}
-
-.site .panel{
-    float:left;
 }
 
 .site .bd li{
