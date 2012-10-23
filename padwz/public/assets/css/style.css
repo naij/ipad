@@ -14,15 +14,14 @@ html,body{height: 100%;}
 
 /* header */
 #header{
-    background:#e9e9e9;
-    box-shadow:0 1px 5px rgba(0,0,0,0.25);
+    background:#262626;
     height:50px;
     width:100%;
     position:fixed;
     z-index:10;
 }
 #header .logo{
-    color:#999;
+    color:#FFF;
     font-size:22px;
     position:absolute;
     top:8px;
@@ -36,91 +35,139 @@ html,body{height: 100%;}
 .side-bar{
     float:left;
     height:100%;
-    width:65px;
-    background:#59173b;
-    background:-webkit-gradient(linear, 0 0, 0 100%, from(#4e1437), color-stop(50%, #8f4045), color-stop(75%, #602b35), color-stop(85%, #3f1a2c))
+    width:104px;
+    background:#dcdcdc;
 }
 .side-bar ul{
-    width:28px;
-    margin:100px auto;
+    width:104px;
+    margin:80px auto;
 }
 .side-bar li{
-    margin-bottom:20px;
-    opacity:0.5;
+    margin-bottom:10px;
+    margin-left: 4px;
 }
-.side-bar li.active{
-    opacity:1;
+
+.side-bar li .iconfont{
+    font-size:20px;
+    position:absolute;
+    top:12px;
+    left:22px;
 }
 .side-bar li a{
+    color:#a8a6a7;
+    font-size: 14px;
+    border-radius:2px 0 0 2px;
     display:block;
+    padding: 17px 0 17px 50px;
     position:relative;
-    padding-top:35px;
-    text-align:center;
 }
-.side-bar li a:active{
-    background:none;
+.side-bar li.active a{
+    background:#f0f0f2;
+}
+.side-bar li.active .site i{
+    color:#fcb01f;
+}
+.side-bar li.active .app i{
+    color:#7baee3;
+}
 
-}
-.side-bar li .iconfont{
-    font-size:28px;
-    position:absolute;
-    top:0;
-    left:0;
-}
 
 .main{
+    background:#f0f0f2;
     box-sizing : border-box;
     height: 100%;
-    padding-left: 65px;
+    padding-left: 104px;
     padding-top: 50px;
 }
 
 .site{
     height: 100%;
-    background-color: #dfdfdf;
-    background-image: url('../img/main-bg.gif');
 }
-
 .site .hd{
     height:44px;
     margin-top:20px;
     position:relative;
 }
-
 .site .hd .tag{
+    color: #333;
     font-size: 24px;
     position: absolute;
     right:20px;
     top:0;
 }
-
 .site .bd li{
     float:left;
-    margin:16px;
+    margin:10px 15px;
 }
 .site .bd li a{
     background:#fff;
     float:left;
     color: #333;
-    height:50px;
-    line-height: 50px;
-    width:120px;
     text-align: center;
     font-size: 14px;
     border-radius: 2px;
-    position:relative;
 }
-
 .site .bd li a img{
-    height: 30px;
     vertical-align: middle;
 }
+.site .bd li a{
+    height: 110px;
+    line-height: 110px;
+    width: 200px;
+}
 
-/*.site .bd li a i{
-    border-radius: 100px 100px 0 0;
-    background: #e9e9e9;
-    position: absolute;
-    bottom: 0;
-    left:0;
-    height:15px;width:100%;
-}*/
+
+.app{
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.app .nav{
+    margin:15px;
+}
+.app .nav li{
+    display:inline-block;
+    margin-right: 20px;
+}
+.app .nav li a{
+    color: #999;
+    font-size: 14px;
+}
+.app .nav li.active a{
+    color: #444;
+}
+
+.app .app-cnt .item{
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+    float: left;
+    margin:15px;
+    padding: 10px;
+    width: 180px;
+}
+.app .app-cnt .item .img{
+    width: 180px;
+    /*height: 150px;
+    overflow: hidden;*/
+}
+.app .app-cnt .item .img img{
+    width: 180px;
+    /*border-radius:21%;*/
+    /*margin-top: -15px;*/
+}
+.app .app-cnt .item .title{
+    color: #666;
+    margin: 5px 0;
+}
+.app .app-cnt .item .size{
+    color: #999;
+    float: left;
+}
+.app .app-cnt .item .view{
+    color: #999;
+    float: right;
+}
+.app .app-cnt .item .view i{
+    font-size: 10px;
+}

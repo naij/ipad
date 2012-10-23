@@ -8,7 +8,7 @@ define(function(require, exports, module) {
         template: _.template(appViewTemplate),
 
         initialize: function(options){
-            this.render();  
+            this.render();
         }, 
 
         render: function(){
