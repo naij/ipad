@@ -8,7 +8,7 @@ define(function(require, exports, module) {
         template: _.template(sidebarViewTemplate),
 
         initialize: function(options){
-            this.render();  
+            this.render();
         }, 
 
         render: function(){
@@ -16,7 +16,6 @@ define(function(require, exports, module) {
             var path = hash.substring(2);
 
             $(this.el).html(this.template({path:path}));
-            return this;
         }  
     });
 

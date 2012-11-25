@@ -1,119 +1,18 @@
 <div class="site" id="site">
     <div class="site-bd">
-        <div class="panel panel-hot">
+        <% _.each(data.result,function(value, key, list){ %>
+        <div class="panel">
             <div class="hd">
-                <div class="tag">热门导航</div>
+                <div class="tag"><%= key %></div>
             </div>
             <div class="bd">
                 <ul class="clearfix">
-                    <li><a href="http://www.baidu.com/" target="_blank"><i></i><img src="/assets/img/baidu.com.png" /></a></li>
-                    <li><a href="http://www.sina.com/" target="_blank"><i></i><img src="/assets/img/sina.com.cn.png" /></a></li>
-                    <li><a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_16596457_2494158_9488014&amp;eventid=101329" target="_blank"><i></i><img src="/assets/img/taobao.com.png" /></a></li>
-                    <li><a href="http://www.youku.com/" target="_blank"><i></i><img src="/assets/img/youku.com.png" /></a></li>
-
-                    <li><a href="http://weibo.com/" target="_blank"><i></i><img src="/assets/img/weibo.com.png" /></a></li>
-                    <li><a href="http://click.union.360buy.com/JdClick/?unionId=19370&amp;t=1&amp;to=http://www.360buy.com" target="_blank"><i></i><img src="/assets/img/360buy.com.png" /></a></li>
-                    <li><a href="http://www.amazon.cn/?_encoding=UTF8&amp;tag=345502059-23&amp;linkCode=ur2&amp;camp=536&amp;creative=3200" target="_blank"><i></i><img src="/assets/img/amazon.cn.png" /></a></li>
-                    <li><a href="http://www.qq.com/" target="_blank"><i></i><img src="/assets/img/qq.com.png" /></a></li>
-
-                    <li><a href="http://www.douban.com/" target="_blank"><i></i><img src="/assets/img/douban.com.png" /></a></li>
-                    <li><a href="http://www.163.com/" target="_blank"><i></i><img src="/assets/img/163.com.png" /></a></li>
-                    <li><a href="http://qzone.qq.com/" target="_blank"><i></i><img src="/assets/img/qzone.qq.com.png" /></a></li>
-                    <li><a href="http://www.renren.com/" target="_blank"><i></i><img src="/assets/img/renren.com.png" /></a></li>
-
-                    <li><a href="http://www.ku6.com/" target="_blank"><i></i><img src="/assets/img/ku6.com.png" /></a></li>
-                    <li><a href="http://www.56.com/" target="_blank"><i></i><img src="/assets/img/56.com.png" /></a></li>
-                    <li><a href="http://www.joy.cn/" target="_blank"><i></i><img src="/assets/img/joy.cn.png" /></a></li>
-                    <li><a href="http://www.qiyi.com/" target="_blank"><i></i><img src="/assets/img/iqiyi.com.png" /></a></li>
+                    <% _.each(value,function(item){ %>
+                    <li><a href="<%= item.url %>" target="_blank" title="<%= item.title %>"><i></i><img src="<%= item.img %>" /></a></li>
+                    <% }) %>
                 </ul>
             </div>
         </div>
-
-        <div class="panel" style="display:none">
-            <div class="hd">
-                <div class="tag">购物</div>
-            </div>
-            <div class="bd">
-                <ul class="clearfix">
-                    <li><a href="http://www.baidu.com/" target="_blank"><i></i><img src="/assets/img/baidu.com.png" /></a></li>
-                    <li><a href="http://www.sina.com/" target="_blank"><i></i><img src="/assets/img/sina.com.cn.png" /></a></li>
-                    <li><a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_16596457_2494158_9488014&amp;eventid=101329" target="_blank"><i></i><img src="/assets/img/taobao.com.png" /></a></li>
-                    <li><a href="http://www.youku.com/" target="_blank"><i></i><img src="/assets/img/youku.com.png" /></a></li>
-
-                    <li><a href="http://weibo.com/" target="_blank"><i></i><img src="/assets/img/weibo.com.png" /></a></li>
-                    <li><a href="http://click.union.360buy.com/JdClick/?unionId=19370&amp;t=1&amp;to=http://www.360buy.com" target="_blank"><i></i><img src="/assets/img/360buy.com.png" /></a></li>
-                    <li><a href="http://www.amazon.cn/?_encoding=UTF8&amp;tag=345502059-23&amp;linkCode=ur2&amp;camp=536&amp;creative=3200" target="_blank"><i></i><img src="/assets/img/amazon.cn.png" /></a></li>
-                    <li><a href="http://www.qq.com/" target="_blank"><i></i><img src="/assets/img/qq.com.png" /></a></li>
-
-                    <li><a href="http://www.douban.com/" target="_blank"><i></i><img src="/assets/img/douban.com.png" /></a></li>
-                    <li><a href="http://www.163.com/" target="_blank"><i></i><img src="/assets/img/163.com.png" /></a></li>
-                    <li><a href="http://qzone.qq.com/" target="_blank"><i></i><img src="/assets/img/qzone.qq.com.png" /></a></li>
-                    <li><a href="http://www.renren.com/" target="_blank"><i></i><img src="/assets/img/renren.com.png" /></a></li>
-
-                    <li><a href="http://www.ku6.com/" target="_blank"><i></i><img src="/assets/img/ku6.com.png" /></a></li>
-                    <li><a href="http://www.56.com/" target="_blank"><i></i><img src="/assets/img/56.com.png" /></a></li>
-                    <li><a href="http://www.joy.cn/" target="_blank"><i></i><img src="/assets/img/joy.cn.png" /></a></li>
-                    <li><a href="http://www.qiyi.com/" target="_blank"><i></i><img src="/assets/img/iqiyi.com.png" /></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel" style="display:none">
-            <div class="hd">
-                <div class="tag">视频</div>
-            </div>
-            <div class="bd">
-                <ul class="clearfix">
-                    <li><a href="http://www.baidu.com/" target="_blank"><i></i><img src="/assets/img/baidu.com.png" /></a></li>
-                    <li><a href="http://www.sina.com/" target="_blank"><i></i><img src="/assets/img/sina.com.cn.png" /></a></li>
-                    <li><a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_16596457_2494158_9488014&amp;eventid=101329" target="_blank"><i></i><img src="/assets/img/taobao.com.png" /></a></li>
-                    <li><a href="http://www.youku.com/" target="_blank"><i></i><img src="/assets/img/youku.com.png" /></a></li>
-
-                    <li><a href="http://weibo.com/" target="_blank"><i></i><img src="/assets/img/weibo.com.png" /></a></li>
-                    <li><a href="http://click.union.360buy.com/JdClick/?unionId=19370&amp;t=1&amp;to=http://www.360buy.com" target="_blank"><i></i><img src="/assets/img/360buy.com.png" /></a></li>
-                    <li><a href="http://www.amazon.cn/?_encoding=UTF8&amp;tag=345502059-23&amp;linkCode=ur2&amp;camp=536&amp;creative=3200" target="_blank"><i></i><img src="/assets/img/amazon.cn.png" /></a></li>
-                    <li><a href="http://www.qq.com/" target="_blank"><i></i><img src="/assets/img/qq.com.png" /></a></li>
-
-                    <li><a href="http://www.douban.com/" target="_blank"><i></i><img src="/assets/img/douban.com.png" /></a></li>
-                    <li><a href="http://www.163.com/" target="_blank"><i></i><img src="/assets/img/163.com.png" /></a></li>
-                    <li><a href="http://qzone.qq.com/" target="_blank"><i></i><img src="/assets/img/qzone.qq.com.png" /></a></li>
-                    <li><a href="http://www.renren.com/" target="_blank"><i></i><img src="/assets/img/renren.com.png" /></a></li>
-
-                    <li><a href="http://www.ku6.com/" target="_blank"><i></i><img src="/assets/img/ku6.com.png" /></a></li>
-                    <li><a href="http://www.56.com/" target="_blank"><i></i><img src="/assets/img/56.com.png" /></a></li>
-                    <li><a href="http://www.joy.cn/" target="_blank"><i></i><img src="/assets/img/joy.cn.png" /></a></li>
-                    <li><a href="http://www.qiyi.com/" target="_blank"><i></i><img src="/assets/img/iqiyi.com.png" /></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel" style="display:none">
-            <div class="hd">
-                <div class="tag">极客</div>
-            </div>
-            <div class="bd">
-                <ul class="clearfix">
-                    <li><a href="http://www.baidu.com/" target="_blank"><i></i><img src="/assets/img/baidu.com.png" /></a></li>
-                    <li><a href="http://www.sina.com/" target="_blank"><i></i><img src="/assets/img/sina.com.cn.png" /></a></li>
-                    <li><a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_16596457_2494158_9488014&amp;eventid=101329" target="_blank"><i></i><img src="/assets/img/taobao.com.png" /></a></li>
-                    <li><a href="http://www.youku.com/" target="_blank"><i></i><img src="/assets/img/youku.com.png" /></a></li>
-
-                    <li><a href="http://weibo.com/" target="_blank"><i></i><img src="/assets/img/weibo.com.png" /></a></li>
-                    <li><a href="http://click.union.360buy.com/JdClick/?unionId=19370&amp;t=1&amp;to=http://www.360buy.com" target="_blank"><i></i><img src="/assets/img/360buy.com.png" /></a></li>
-                    <li><a href="http://www.amazon.cn/?_encoding=UTF8&amp;tag=345502059-23&amp;linkCode=ur2&amp;camp=536&amp;creative=3200" target="_blank"><i></i><img src="/assets/img/amazon.cn.png" /></a></li>
-                    <li><a href="http://www.qq.com/" target="_blank"><i></i><img src="/assets/img/qq.com.png" /></a></li>
-
-                    <li><a href="http://www.douban.com/" target="_blank"><i></i><img src="/assets/img/douban.com.png" /></a></li>
-                    <li><a href="http://www.163.com/" target="_blank"><i></i><img src="/assets/img/163.com.png" /></a></li>
-                    <li><a href="http://qzone.qq.com/" target="_blank"><i></i><img src="/assets/img/qzone.qq.com.png" /></a></li>
-                    <li><a href="http://www.renren.com/" target="_blank"><i></i><img src="/assets/img/renren.com.png" /></a></li>
-
-                    <li><a href="http://www.ku6.com/" target="_blank"><i></i><img src="/assets/img/ku6.com.png" /></a></li>
-                    <li><a href="http://www.56.com/" target="_blank"><i></i><img src="/assets/img/56.com.png" /></a></li>
-                    <li><a href="http://www.joy.cn/" target="_blank"><i></i><img src="/assets/img/joy.cn.png" /></a></li>
-                    <li><a href="http://www.qiyi.com/" target="_blank"><i></i><img src="/assets/img/iqiyi.com.png" /></a></li>
-                </ul>
-            </div>
-        </div>
+        <% }) %>
     </div>
 </div>

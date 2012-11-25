@@ -3,32 +3,21 @@ define(function(require, exports, module) {
     var AppRouter = Backbone.Router.extend({
         routes: {
             "" : "index",
-            "!/app" : "app",
-            "!/search" : "search"
+            "!/app" : "app"
         },
 
         index : function(){
-            var SidebarView = require('../views/sidebar.js#');
-            var sidebarView = new SidebarView();
-
-            var SiteView = require('../views/site.js#');
+            var SiteView = require('../views/site');
             var siteView = new SiteView();
+            SiteView = null;
+            siteView = null;
         },
 
         app : function() {
-            var SidebarView = require('../views/sidebar.js#');
-            var sidebarView = new SidebarView();
-
-            var AppView = require('../views/app.js#');
+            var AppView = require('../views/app');
             var appView = new AppView();
-        },
-
-        search : function(){
-            var SidebarView = require('../views/sidebar.js#');
-            var sidebarView = new SidebarView();
-
-            var SearchView = require('../views/search.js#');
-            var searchView = new SearchView();
+            AppView = null;
+            appView = null;
         }
     });
 
