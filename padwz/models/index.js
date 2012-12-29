@@ -15,4 +15,4 @@ mongoose.connect(db, function (err) {
 // models
 require('./user');
 
-exports.User = mongoose.model('User');
+exports.User = mongoose.model('user');

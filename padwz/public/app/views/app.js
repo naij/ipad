@@ -1,5 +1,8 @@
 define(function(require, exports, module) {
-
+    var Backbone = require('backbone');
+    var _ = require('underscore');
+    var $ = require('$');
+    
     var appViewTemplate = require('./app.html#');
     var appCollection = require('../collections/app');
     var appC = new appCollection();

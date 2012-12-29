@@ -1,5 +1,9 @@
 define(function(require, exports, module) {
-
+    var Backbone = require('backbone');
+    var _ = require('underscore');
+    var $ = require('$');
+    
+    var swipe = require('../components/swipe');
     var siteViewTemplate = require('./site.html#');
     var siteCollection = require('../collections/site');
     var siteC = new siteCollection();
@@ -29,7 +33,7 @@ define(function(require, exports, module) {
             site.css({'width':width + 'px'});
 
             //水平滑动
-            var slider = new Swipe($('#site')[0]);
+            var slider = new swipe($('#site')[0]);
             slider = null;
         }
     });

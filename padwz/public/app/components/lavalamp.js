@@ -1,14 +1,11 @@
 define(function(require, exports, module) {
-    
-    function Lavalamp(cfg) {
-        this.cfg = cfg
-        this.init();
-    }
+    var $ = require('$');
+    var Class = require('class');
 
-    $.extend(Lavalamp.prototype,{
-        init : function(){
+    var Lavalamp = Class.create({
+        initialize : function(cfg) {
             var self = this;
-            var trigger = $(self.cfg.el);
+            var trigger = $(cfg.el);
             var backNode = $('<li class="back"></li>');
             var liList = trigger.find('li');
 
@@ -64,6 +61,7 @@ define(function(require, exports, module) {
                 Backbone.history.navigate(node.attr('path'), {trigger: true, replace: true});
             });
         }
+
     });
 
     return Lavalamp;

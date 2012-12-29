@@ -7,7 +7,7 @@ var User = models.User;
 
 // Show user login page.
 exports.showInit = function(req, res) {
-    res.render('sign/init');
+    res.render('admin/init');
 };
 
 exports.init = function(req, res, next){
@@ -15,7 +15,7 @@ exports.init = function(req, res, next){
     var pass = sanitize(req.body.pass).trim();
 
     if (!loginname || !pass) {
-        return res.render('sign/signin', {
+        return res.render('admin/signin', {
             error: '用户名或者密码错误'
         });
     }
@@ -29,7 +29,7 @@ exports.showLogin = function(req, res) {
         res.redirect('home');
     }
     else{
-        res.render('sign/signin');
+        res.render('admin/signin');
     }
 };
 
@@ -39,7 +39,7 @@ exports.login = function(req, res, next) {
     var pass = sanitize(req.body.pass).trim();
 
     if (!loginname || !pass) {
-        return res.render('sign/signin', {
+        return res.render('admin/signin', {
             error: '用户名或者密码错误'
         });
     }
@@ -48,12 +48,12 @@ exports.login = function(req, res, next) {
         if (err) return next(err);
 
         if (!user) {
-            return res.render('sign/signin', {
+            return res.render('admin/signin', {
                 error: '用户不存在。'
             });
         }
         if (pass !== user.pass) {
-            return res.render('sign/signin', {
+            return res.render('admin/signin', {
                 error: '密码错误。'
             });
         }

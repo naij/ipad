@@ -1,5 +1,8 @@
 define(function(require, exports, module) {
-
+    var Backbone = require('backbone');
+    var _ = require('underscore');
+    var $ = require('$');
+    
     var layoutViewTemplate = require('./layout.html#');
     var lavalamp = require('../components/lavalamp');
 
@@ -9,7 +12,7 @@ define(function(require, exports, module) {
         template: _.template(layoutViewTemplate),
 
         initialize: function(options){
-            this.render();  
+            this.render();
         },
 
         render: function(){

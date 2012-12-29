@@ -7,4 +7,4 @@ var UserSchema = new Schema({
     pass: { type: String }
 });
 
-mongoose.model('User', UserSchema, 'user');
+mongoose.model('user', UserSchema, 'user');

@@ -41,8 +41,8 @@ exports.config = {
 
         return generate_mongo_url(mongo);
     },
-    session_secret: 'ipad',
-  	auth_cookie_name: 'ipad',
+    session_secret: 'ipadwz',
+  	auth_cookie_name: 'ipadwz',
 
   	// admin 管理员权限
   	admins: { admin: true }
