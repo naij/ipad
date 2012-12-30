@@ -1,59 +1,143 @@
+a,
+a:visited{
+    color: #06d;
+}
+a:hover{
+    color: #ff8400;
+    text-decoration: none;
+}
+
+
+/* 颜色 */
+.color-blue{
+    color: #06d;
+}
+
+
+select, input[type="checkbox"], input[type="radio"] {
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    border: 1px solid #DDD;
+    border-bottom-color: #BBB;
+    border-radius: 2px;
+    background-color: #F4F4F4;
+    background-image: -moz-linear-gradient(top, #F8F8F8, #EEE);
+    background-image: -ms-linear-gradient(top, #F8F8F8, #EEE);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F8F8F8), to(#EEE));
+    background-image: -webkit-linear-gradient(top, #F8F8F8, #EEE);
+    background-image: -o-linear-gradient(top, #F8F8F8, #EEE);
+    background-image: linear-gradient(top, #F8F8F8, #EEE);
+    background-repeat: repeat-x;
+    color: #444;
+    margin: 0 1px 0 0;
+    outline: none;
+    vertical-align: middle;
+}
+select{
+    -webkit-padding-end: 6px;
+    -webkit-padding-start: 6px;
+    font-size: 12px;
+    height: 25px;
+}
+
+.input{
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.btn{
+    font-weight: normal;
+    vertical-align: middle;
+}
+
 /* 基本表单 */
 .union-form .field{
-    margin-bottom:20px;
-    zoom:1;
+    margin-bottom: 20px;
+    zoom: 1;
 }
 .union-form .field-label{
-    display:inline-block;
-    padding-right:20px;
-    width:98px;
-    text-align:right;
+    display: inline-block;
+    padding-right: 20px;
+    width: 98px;
+    text-align: right;
 }
 .union-form .field-set{
-    display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align:top;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: top;
 }
 .union-form .field-default{
-    display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align:middle;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
 }
 .union-form .field .msg{
-    height:24px;
-    color:#000;
+    height: 24px;
+    color: #000;
 }
 .union-form .field .msg .estate{
-    float:left;
-    padding:2px 10px 2px 23px;
-    background-image:url(http://a.tbcdn.cn/s/kissy/1.2.0/validation/assets/img/msg_bg.png);
-    background-repeat:no-repeat;
-    background-position:-100px -100px;
-    border-width:1px;
-    border-style:solid;
+    float: left;
+    padding: 2px 10px 2px 23px;
+    background-image: url(http://a.tbcdn.cn/s/kissy/1.2.0/validation/assets/img/msg_bg.png);
+    background-repeat: no-repeat;
+    background-position: -100px -100px;
+    border-width: 1px;
+    border-style: solid;
 }
 .union-form .field .msg .tip{
-    background-position:3px -147px;
-    background-color:#e5f5ff;
-    border-color:#40b3ff;
+    background-position: 3px -147px;
+    background-color: #e5f5ff;
+    border-color: #40b3ff;
 }
 .union-form .field .msg .error{
-    background-position:3px 3px;
-    border-color:#ff8080;
-    background-color:#fff2f2;
+    background-position: 3px 3px;
+    border-color: #ff8080;
+    background-color: #fff2f2;
 }
 .union-form .field .msg .ok{
-    background-position:3px -247px;
-    background-color:#f0ffe5;
-    border-color:#4dbf00;
+    background-position: 3px -247px;
+    background-color: #f0ffe5;
+    border-color: #4dbf00;
+}
+
+/* 表格 */
+.table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+.table tr:hover{
+    background-color: #f6f6f6;
+}
+.table th,
+.table td{
+    border-bottom: 1px solid #E6E6E6;
+    padding: 10px;
+    text-align: left;
+}
+.table th{
+    padding: 5px 10px;
+}
+
+/* 提示 */
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 18px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #FCF8E3;
+    border: 1px solid #FBEED5;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #C09853;
 }
 
 /* header */
 #header{
-    background:#262626;
-    height:50px;
+    background: #262626;
+    height: 50px;
 }
 .header-bd{
     width: 1000px;
@@ -61,10 +145,20 @@
     position: relative;
 }
 .header-bd .logo{
-    color:#FFF;
-    font-size:22px;
-    position:absolute;
-    top:8px;
+    color: #FFF;
+    font-size: 22px;
+    position: absolute;
+    top: 8px;
+}
+.header-bd .login-info{
+    float: right;
+    color: #eee;
+    background: #333;
+    padding: 5px 10px;
+    border-radius: 0px 0px 2px 2px;
+}
+.header-bd .login-info a{
+    color: #eee;
 }
 
 /* content */
@@ -75,12 +169,43 @@
 
 /* 登录 */
 .signin .hd{
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-    padding-bottom:10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
 }
 .signin .hd .title{
     font-size: 14px;
+}
+
+/* 后台 */
+.admin-guide{
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+.admin-guide .hd{
+    background-color: #efefef;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+.admin-guide .hd .title{
+    float: left;
+}
+.admin-guide .hd .extra{
+    float: right;
+}
+.admin-guide .bd{
+}
+.admin-guide .bd li{
+    padding: 10px 20px;
+}
+.admin-guide .bd li:hover{
+    background-color: #f6f6f6;
+}
+
+/* 网址设置 */
+.site-set .table{
+    margin-bottom: -1px;
 }
 
 

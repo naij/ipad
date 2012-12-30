@@ -19,8 +19,6 @@ exports.init = function(req, res, next){
             error: '用户名或者密码错误'
         });
     }
-
-    
 }
 
 // Show user login page.
