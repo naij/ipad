@@ -41,6 +41,9 @@ exports.config = {
 
         return generate_mongo_url(mongo);
     },
+
+    upload_dir: path.join(__dirname, 'public', 'assets', 'img'),
+
     session_secret: 'ipadwz',
   	auth_cookie_name: 'ipadwz',
 

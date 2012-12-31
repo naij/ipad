@@ -17,4 +17,5 @@ module.exports = function(app) {
     app.get('/admin', admin.showAdmin);
     app.get('/site_set',admin.showSiteSet);
     app.get('/site_add',admin.showSiteAdd);
+    app.post('/site_add',admin.siteAdd);
 }

@@ -1,25 +1,42 @@
+<% if(locals.error){ %>
+<div class="alert"><%= error %> </div>
+<% } %>
+
 <div class="admin-guide site-set">
     <div class="hd clearfix">
         <h3 class="title">后台设置-网址添加</h3>
     </div>
     <div class="bd">
-        <ul class="union-form">
-            <li class="field">
-                <label class="field-label">图片：</label>
-                <input type="file" class="input" name="img" />
-            </li>
-            <li class="field">
-                <label class="field-label">标题：</label>
-                <input type="text" class="input" name="title" />
-            </li>
-            <li class="field">
-                <label class="field-label">链接：</label>
-                <input type="text" class="input" name="url" />
-            </li>
-            <li class="field">
-                <label class="field-label">&nbsp;</label>
-                <a href="#" class="btn btn-size25">提交</a>
-            </li>
-        </ul>
+        <form action="/site_add" enctype="multipart/form-data" method="post" id="addForm">
+            <ul class="union-form">
+                <li class="field">
+                    <label class="field-label">图片：</label>
+                    <input type="file" class="input" name="img">
+                </li>
+                <li class="field">
+                    <label class="field-label">标题：</label>
+                    <input type="text" class="input" name="title">
+                </li>
+                <li class="field">
+                    <label class="field-label">链接：</label>
+                    <input type="text" class="input" name="url">
+                </li>
+                <li class="field">
+                    <label class="field-label">&nbsp;</label>
+                    <a href="#" id="submit" class="btn btn-size25">提交</a>
+                </li>
+            </ul>
+        </form>
     </div>
+
+    <script type="text/javascript">
+        seajs.use(['jquery'],function($){
+            $(function(){
+                $('#submit').click(function(e){
+                    e.preventDefault();
+                    $('#addForm').submit();
+                });
+            });
+        });
+    </script>
 </div>
