@@ -3,7 +3,7 @@ var path = require('path');
 var sanitize = require('validator').sanitize;
 var config = require('../config').config;
 var models = require('../models');
-var site = models.site;
+var Site = models.Site;
 
 // Show admin page.
 exports.showAdmin = function(req, res) {
@@ -12,7 +12,15 @@ exports.showAdmin = function(req, res) {
 
 // Show site set page.
 exports.showSiteSet = function(req, res) {
-    res.render('admin/site_set');
+    Site.find({},null,null,function(err, doc) {
+        if (err) {
+            return next(err);
+        }
+
+        res.render('admin/site_set',{
+            list : doc
+        });
+    });
 };
 
 // Show site add page.
@@ -48,7 +56,17 @@ exports.siteAdd = function(req, res) {
         if (err) {
             return next(err);
         }
-        console.log('file '+ filename +'had uploaded to ' + config.upload_dir);
-        res.render('admin/site_set');
+        console.log('file '+ filename +' had be uploaded to ' + config.upload_dir);
+
+        var site = new Site();
+        site.title = title;
+        site.url = url;
+        site.img = '/assets/upload/'+ filename;
+        site.save(function (err) {
+            if (err) {
+                return next(err);
+            }
+            return res.redirect('/site_set');
+        });
     });
 };

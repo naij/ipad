@@ -22,60 +22,19 @@
                 </tr>
             </thead>
             <tbody>
+                <% for (var i = 0, l = list.length; i < l; i++) { %>
                 <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
                     <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
+                        <img src="<%= list[i].img %>" alt="">
+                    </td>
+                    <td><%= list[i].title %></td>
+                    <td><%= list[i].url %></td>
+                    <td>
+                        <a href="<%= list[i]._id %>" class="color-blue">编辑</a>
+                        <a href="<%= list[i]._id %>" class="color-blue">删除</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
-                    <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
-                    <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
-                    <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
-                    <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>sdfsd</td>
-                    <td>sdfds</td>
-                    <td>sdfds</td>
-                    <td>
-                        <a href="" class="color-blue">编辑</a>
-                        <a href="" class="color-blue">删除</a>
-                    </td>
-                </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

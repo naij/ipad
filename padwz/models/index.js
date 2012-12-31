@@ -14,5 +14,7 @@ mongoose.connect(db, function (err) {
 
 // models
 require('./user');
+require('./site');
 
 exports.User = mongoose.model('user');
+exports.Site = mongoose.model('site');
