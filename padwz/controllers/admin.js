@@ -52,23 +52,32 @@ exports.siteAdd = function(req, res) {
 
     var filename = img.name;
     var savepath = path.join(config.upload_dir, filename);
-    fs.rename(img.path, savepath, function (err) {
-        if (err) {
-            return next(err);
-        }
-        console.log('file '+ filename +' had be uploaded to ' + config.upload_dir);
 
-        var site = new Site();
-        site.title = title;
-        site.url = url;
-        site.img = '/assets/upload/'+ filename;
-        site.imgname = filename;
-        site.save(function (err) {
-            if (err) {
-                return next(err);
-            }
-            return res.redirect('/site_set');
-        });
+    fs.exists(savepath,function(exists){
+        if(exists){
+            return res.render('admin/site_add', {
+                error: '图片已存在，请重新上传'
+            });
+        }
+        else{
+            fs.rename(img.path, savepath, function (err) {
+                if (err) {
+                    return next(err);
+                }
+
+                var site = new Site();
+                site.title = title;
+                site.url = url;
+                site.img = '/assets/upload/'+ filename;
+                site.imgname = filename;
+                site.save(function (err) {
+                    if (err) {
+                        return next(err);
+                    }
+                    return res.redirect('/site_set');
+                });
+            });
+        }
     });
 };
 
@@ -81,8 +90,9 @@ exports.siteDel = function(req, res, next){
     }
 
     if (site_id.length !== 24) {
-        console.log('此话题不存在或已被删除。');
-        return;
+        return res.render('admin/site_set',{
+            error : '此记录不存在或已被删除。'
+        });
     }
 
     Site.findOne({_id: site_id}, function(err, doc) {
@@ -90,20 +100,25 @@ exports.siteDel = function(req, res, next){
 
         var filepath = path.join(config.upload_dir,doc.imgname);
 
-        console.log(filepath);
+        doc.remove(function(err){
+            if(err){
+                return next(err);
+            }
 
-        fs.exists(filepath,function(exists){
-            if(exists){
-                fs.unlink(filepath,function(err){
-                    if(err){
-                        return next(err);
-                    }
+            fs.exists(filepath,function(exists){
+                if(exists){
+                    fs.unlink(filepath,function(err){
+                        if(err){
+                            return next(err);
+                        }
 
-                    doc.remove(function(err){
                         return res.redirect('/site_set');
                     });
-                });
-            }
+                }
+                else{
+                    return res.redirect('/site_set');
+                }
+            });
         });
     });
 }

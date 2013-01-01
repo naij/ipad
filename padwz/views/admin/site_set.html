@@ -1,3 +1,7 @@
+<% if(locals.error){ %>
+<div class="alert"><%= error %> </div>
+<% } %>
+
 <div class="admin-guide site-set">
     <div class="hd clearfix">
         <h3 class="title">后台设置-网址设置</h3>
@@ -35,7 +39,7 @@
                             <img src="<%= list[i].img %>" alt="">
                         </td>
                         <td><%= list[i].title %></td>
-                        <td><%= list[i].url %></td>
+                        <td><a href="<%= list[i].url %>" target="_blank"><%= list[i].url %></a></td>
                         <td>
                             <a href="/site_edit/sid=<%= list[i]._id %>" class="color-blue">编辑</a>
                             <a href="/site_del/sid=<%= list[i]._id %>" class="color-blue">删除</a>
