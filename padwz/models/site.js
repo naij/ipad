@@ -5,6 +5,7 @@ var SiteSchema = new Schema({
     title: { type: String },
     url: { type: String },
     img: { type: String },
+    imgname : { type: String },
 	tag: { type: String }
 });
 

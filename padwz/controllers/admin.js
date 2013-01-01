@@ -5,12 +5,12 @@ var config = require('../config').config;
 var models = require('../models');
 var Site = models.Site;
 
-// Show admin page.
+// 显示后台管理页面
 exports.showAdmin = function(req, res) {
     res.render('admin/admin');
 };
 
-// Show site set page.
+// 显示网站管理页面
 exports.showSiteSet = function(req, res) {
     Site.find({},null,null,function(err, doc) {
         if (err) {
@@ -23,12 +23,12 @@ exports.showSiteSet = function(req, res) {
     });
 };
 
-// Show site add page.
+// 显示网站添加页面
 exports.showSiteAdd = function(req, res) {
     res.render('admin/site_add');
 };
 
-// site add
+// 网站添加
 exports.siteAdd = function(req, res) {
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
@@ -62,6 +62,7 @@ exports.siteAdd = function(req, res) {
         site.title = title;
         site.url = url;
         site.img = '/assets/upload/'+ filename;
+        site.imgname = filename;
         site.save(function (err) {
             if (err) {
                 return next(err);
@@ -70,3 +71,39 @@ exports.siteAdd = function(req, res) {
         });
     });
 };
+
+// 网站删除
+exports.siteDel = function(req, res, next){
+    var site_id = req.params.sid;
+
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    if (site_id.length !== 24) {
+        console.log('此话题不存在或已被删除。');
+        return;
+    }
+
+    Site.findOne({_id: site_id}, function(err, doc) {
+        if (err) return next(err);
+
+        var filepath = path.join(config.upload_dir,doc.imgname);
+
+        console.log(filepath);
+
+        fs.exists(filepath,function(exists){
+            if(exists){
+                fs.unlink(filepath,function(err){
+                    if(err){
+                        return next(err);
+                    }
+
+                    doc.remove(function(err){
+                        return res.redirect('/site_set');
+                    });
+                });
+            }
+        });
+    });
+}
