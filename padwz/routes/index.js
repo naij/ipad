@@ -15,8 +15,10 @@ module.exports = function(app) {
 
     // 后台
     app.get('/admin', admin.showAdmin);
-    app.get('/site_set',admin.showSiteSet);
+    app.get('/site_manage',admin.showSiteManage);
     app.get('/site_add',admin.showSiteAdd);
     app.post('/site_add',admin.siteAdd);
     app.get('/site_del/sid=:sid',admin.siteDel);
+    app.get('/site_tag_manage',admin.showSiteTagManage);
+
 }

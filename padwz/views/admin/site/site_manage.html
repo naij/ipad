@@ -2,9 +2,9 @@
 <div class="alert"><%= error %> </div>
 <% } %>
 
-<div class="admin-guide site-set">
+<div class="admin-guide site-manage">
     <div class="hd clearfix">
-        <h3 class="title">后台设置-网址设置</h3>
+        <h3 class="title">后台设置-网址管理</h3>
         <div class="extra">
             <select>
                 <option value="">热门导航</option>
@@ -12,12 +12,16 @@
                 <option value="">视频</option>
                 <option value="">极客</option>
             </select>
-            <a href="/site_add" class="btn btn-size25">新增网址</a>
         </div>
     </div>
     <div class="bd">
         <table class="table">
             <thead>
+                <tr>
+                    <th colspan="4">
+                        <a href="/site_add" class="btn btn-size25">新增网址</a>
+                    </th>
+                </tr>
                 <tr>
                     <th width="120">图片</th>
                     <th width="120">标题</th>

@@ -11,13 +11,13 @@ exports.showAdmin = function(req, res) {
 };
 
 // 显示网站管理页面
-exports.showSiteSet = function(req, res) {
+exports.showSiteManage = function(req, res) {
     Site.find({},null,null,function(err, doc) {
         if (err) {
             return next(err);
         }
 
-        res.render('admin/site_set',{
+        res.render('admin/site/site_manage',{
             list : doc
         });
     });
@@ -25,7 +25,7 @@ exports.showSiteSet = function(req, res) {
 
 // 显示网站添加页面
 exports.showSiteAdd = function(req, res) {
-    res.render('admin/site_add');
+    res.render('admin/site/site_add');
 };
 
 // 网站添加
@@ -35,17 +35,17 @@ exports.siteAdd = function(req, res) {
     var img = req.files && req.files.img;
 
     if (!title) {
-        return res.render('admin/site_add', {
+        return res.render('admin/site/site_add', {
             error: '请输入标题'
         });
     }
     else if(!url){
-        return res.render('admin/site_add', {
+        return res.render('admin/site/site_add', {
             error: '请输入链接'
         });
     }
     else if(!img){
-        return res.render('admin/site_add', {
+        return res.render('admin/site/site_add', {
             error: '请选择要上传的文件'
         });
     }
@@ -55,7 +55,7 @@ exports.siteAdd = function(req, res) {
 
     fs.exists(savepath,function(exists){
         if(exists){
-            return res.render('admin/site_add', {
+            return res.render('admin/site/site_add', {
                 error: '图片已存在，请重新上传'
             });
         }
@@ -74,7 +74,7 @@ exports.siteAdd = function(req, res) {
                     if (err) {
                         return next(err);
                     }
-                    return res.redirect('/site_set');
+                    return res.redirect('/site_manage');
                 });
             });
         }
@@ -90,7 +90,7 @@ exports.siteDel = function(req, res, next){
     }
 
     if (site_id.length !== 24) {
-        return res.render('admin/site_set',{
+        return res.render('admin/site/site_manage',{
             error : '此记录不存在或已被删除。'
         });
     }
@@ -112,13 +112,17 @@ exports.siteDel = function(req, res, next){
                             return next(err);
                         }
 
-                        return res.redirect('/site_set');
+                        return res.redirect('/site_manage');
                     });
                 }
                 else{
-                    return res.redirect('/site_set');
+                    return res.redirect('/site_manage');
                 }
             });
         });
     });
+}
+
+exports.showSiteTagManage = function(req, res, next){
+    res.render('admin/site/site_tag_manage');
 }
