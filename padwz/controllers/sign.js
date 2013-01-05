@@ -15,9 +15,8 @@ exports.init = function(req, res, next){
     var pass = sanitize(req.body.pass).trim();
 
     if (!loginname || !pass) {
-        return res.render('admin/signin', {
-            error: '用户名或者密码错误'
-        });
+        req.flash('error','用户名或者密码错误');
+        return res.redirect('/signin');
     }
 }
 
@@ -37,23 +36,20 @@ exports.login = function(req, res, next) {
     var pass = sanitize(req.body.pass).trim();
 
     if (!loginname || !pass) {
-        return res.render('admin/signin', {
-            error: '用户名或者密码错误'
-        });
+        req.flash('error','用户名或者密码错误');
+        return res.redirect('/signin');
     }
 
     User.findOne({'loginname': loginname}, function(err, user) {
         if (err) return next(err);
 
         if (!user) {
-            return res.render('admin/signin', {
-                error: '用户不存在。'
-            });
+            req.flash('error','用户不存在。');
+            return res.redirect('/signin');
         }
         if (pass !== user.pass) {
-            return res.render('admin/signin', {
-                error: '密码错误。'
-            });
+            req.flash('error','密码错误。');
+            return res.redirect('/signin');
         }
         // store session cookie
         gen_session(user, res);

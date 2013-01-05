@@ -22,6 +22,10 @@
             </div>
         </div>
         <div id="content">
+            <% if(error){ %>
+            <div class="alert"><%= error %> </div>
+            <% } %>
+            
             <%- body %>
         </div>
         <div id='footer'>

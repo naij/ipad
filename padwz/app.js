@@ -40,9 +40,21 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-// set static, dynamic helpers
+// 视图助手
 app.helpers({
     config: config
+});
+
+app.dynamicHelpers({
+    error : function(req,res){
+        var err = req.flash('error');
+        if(err.length){
+            return err;
+        }
+        else{
+            return null;
+        }
+    }
 });
 
 // Routes

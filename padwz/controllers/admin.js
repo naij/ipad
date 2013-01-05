@@ -35,19 +35,16 @@ exports.siteAdd = function(req, res) {
     var img = req.files && req.files.img;
 
     if (!title) {
-        return res.render('admin/site/site_add', {
-            error: '请输入标题'
-        });
+        req.flash('error','请输入标题');
+        return res.redirect('/site_add');
     }
     else if(!url){
-        return res.render('admin/site/site_add', {
-            error: '请输入链接'
-        });
+        req.flash('error','请输入链接');
+        return res.redirect('/site_add');
     }
     else if(!img){
-        return res.render('admin/site/site_add', {
-            error: '请选择要上传的文件'
-        });
+        req.flash('error','请选择要上传的文件');
+        return res.redirect('/site_add');
     }
 
     var filename = img.name;
@@ -55,9 +52,8 @@ exports.siteAdd = function(req, res) {
 
     fs.exists(savepath,function(exists){
         if(exists){
-            return res.render('admin/site/site_add', {
-                error: '图片已存在，请重新上传'
-            });
+            req.flash('error','图片已存在，请重新上传');
+            return res.redirect('/site_add');
         }
         else{
             fs.rename(img.path, savepath, function (err) {
@@ -90,9 +86,8 @@ exports.siteDel = function(req, res, next){
     }
 
     if (site_id.length !== 24) {
-        return res.render('admin/site/site_manage',{
-            error : '此记录不存在或已被删除。'
-        });
+        req.flash('error','此记录不存在或已被删除。');
+        return res.redirect('/site_manage');
     }
 
     Site.findOne({_id: site_id}, function(err, doc) {
@@ -111,7 +106,6 @@ exports.siteDel = function(req, res, next){
                         if(err){
                             return next(err);
                         }
-
                         return res.redirect('/site_manage');
                     });
                 }
