@@ -73,7 +73,6 @@ exports.auth_user = function(req, res, next) {
         if (config.admins[req.session.user.name]) {
             req.session.user.is_admin = true;
         }
-        res.local('current_user', req.session.user);
         return next();
     }
     else {
@@ -92,7 +91,6 @@ exports.auth_user = function(req, res, next) {
                 }
 
                 req.session.user = user;
-                res.local('current_user', req.session.user);
                 return next();
             }
             else {

@@ -46,6 +46,9 @@ app.helpers({
 });
 
 app.dynamicHelpers({
+    user : function(req,res){
+        return req.session.user;
+    },
     error : function(req,res){
         var err = req.flash('error');
         if(err.length){

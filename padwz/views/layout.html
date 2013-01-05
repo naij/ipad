@@ -13,10 +13,10 @@
     <body>
         <div id="header">
             <div class="header-bd">
-                <h1 class="logo">PAD导航</h1>
-                <% if (locals.current_user) { %>
+                <h1 class="logo"><a href="/">PAD导航</a></h1>
+                <% if (user) { %>
                     <div class="login-info">
-                        <%= locals.current_user.loginname %> | <a href="/admin" target="_blank">后台设置</a> | <a href="/signout">注销</a>
+                        <%= user.loginname %> | <a href="/admin">后台设置</a> | <a href="/signout">注销</a>
                     </div>
                 <% } %>
             </div>

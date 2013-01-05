@@ -150,6 +150,12 @@ select{
     position: absolute;
     top: 8px;
 }
+.header-bd .logo a{
+    color: #FFF;
+}
+.header-bd .logo a:hover{
+    color: #FFF;
+}
 .header-bd .login-info{
     float: right;
     color: #eee;
