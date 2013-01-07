@@ -12,6 +12,24 @@ exports.showAdmin = function(req, res) {
         return res.redirect('home');
     }
 
+    Site.aggregate(
+        { 
+            $group: {
+                _id: '$tag', 
+                expense: { $addToSet: '$imgname' }
+            }
+        },
+        { 
+            $project: {
+                _id: 1, 
+                expense: 1 
+            }
+        },
+        function(err, summary) {
+            console.log(summary);
+        }
+    );
+
     res.render('admin/admin');
 };
 
