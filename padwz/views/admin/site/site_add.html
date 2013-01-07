@@ -8,10 +8,9 @@
                 <li class="field">
                     <label class="field-label">标签：</label>
                     <select>
-                        <option value="">热门导航</option>
-                        <option value="">购物</option>
-                        <option value="">视频</option>
-                        <option value="">极客</option>
+                        <% for (var i = 0, l = list.length; i < l; i++) { %>
+                            <option value="<%= list[i]._id %>"><%= list[i].name %></option>
+                        <% } %>
                     </select>
                 </li>
                 <li class="field">

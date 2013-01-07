@@ -38,9 +38,15 @@ exports.showSiteAdd = function(req, res) {
         return res.redirect('home');
     }
 
+    SiteTag.find({},null,null,function(err, doc) {
+        if (err) {
+            return next(err);
+        }
 
-
-    res.render('admin/site/site_add');
+        res.render('admin/site/site_add',{
+            list : doc
+        });
+    });
 };
 
 // 网站添加
