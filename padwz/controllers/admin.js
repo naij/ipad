@@ -55,6 +55,7 @@ exports.siteAdd = function(req, res) {
         return res.redirect('home');
     }
 
+    var tag = req.body.tag;
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
     var img = req.files && req.files.img;
@@ -87,6 +88,7 @@ exports.siteAdd = function(req, res) {
                 }
 
                 var site = new Site();
+                site.tag = tag;
                 site.title = title;
                 site.url = url;
                 site.img = '/assets/upload/'+ filename;

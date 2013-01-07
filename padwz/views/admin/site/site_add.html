@@ -7,7 +7,7 @@
             <ul class="union-form">
                 <li class="field">
                     <label class="field-label">标签：</label>
-                    <select>
+                    <select name="tag">
                         <% for (var i = 0, l = list.length; i < l; i++) { %>
                             <option value="<%= list[i]._id %>"><%= list[i].name %></option>
                         <% } %>
