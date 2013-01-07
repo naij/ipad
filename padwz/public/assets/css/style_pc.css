@@ -34,8 +34,11 @@ select, input[type="checkbox"], input[type="radio"] {
     vertical-align: middle;
 }
 select{
-    -webkit-padding-end: 6px;
-    -webkit-padding-start: 6px;
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 6px; 
+    background-image: url('../img/arrow.png');
+    background-position: right center;
+    background-repeat: no-repeat;
     font-size: 12px;
     height: 25px;
 }

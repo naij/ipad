@@ -7,11 +7,19 @@ var Site = models.Site;
 
 // 显示后台管理页面
 exports.showAdmin = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+        
     res.render('admin/admin');
 };
 
 // 显示网站管理页面
 exports.showSiteManage = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
     Site.find({},null,null,function(err, doc) {
         if (err) {
             return next(err);
@@ -25,11 +33,19 @@ exports.showSiteManage = function(req, res) {
 
 // 显示网站添加页面
 exports.showSiteAdd = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
     res.render('admin/site/site_add');
 };
 
 // 网站添加
 exports.siteAdd = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
     var img = req.files && req.files.img;
