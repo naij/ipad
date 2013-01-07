@@ -17,7 +17,24 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <% if(list.length == 0) { %>
+                    <tr>
+                        <td colspan="3" align="center">
+                            暂时没有标签
+                        </td>
+                    </tr>
+                <% }else { %>
+                    <% for (var i = 0, l = list.length; i < l; i++) { %>
+                    <tr>
+                        <td><%= list[i].name %></td>
+                        <td><%= list[i]._id %></td>
+                        <td>
+                            <a href="/site_tag_edit/tid=<%= list[i]._id %>" class="color-blue">编辑</a>
+                            <a href="/site_tag_del/tid=<%= list[i]._id %>" class="color-blue">删除</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                <% } %>
             </tbody>
         </table>
     </div>

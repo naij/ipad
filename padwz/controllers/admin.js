@@ -4,13 +4,14 @@ var sanitize = require('validator').sanitize;
 var config = require('../config').config;
 var models = require('../models');
 var Site = models.Site;
+var SiteTag = models.SiteTag;
 
 // 显示后台管理页面
 exports.showAdmin = function(req, res) {
     if (!req.session.user) {
         return res.redirect('home');
     }
-        
+
     res.render('admin/admin');
 };
 
@@ -36,6 +37,8 @@ exports.showSiteAdd = function(req, res) {
     if (!req.session.user) {
         return res.redirect('home');
     }
+
+
 
     res.render('admin/site/site_add');
 };
@@ -133,6 +136,77 @@ exports.siteDel = function(req, res, next){
     });
 }
 
+// 显示网址标签管理页面
 exports.showSiteTagManage = function(req, res, next){
-    res.render('admin/site/site_tag_manage');
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    SiteTag.find({},null,null,function(err, doc) {
+        if (err) {
+            return next(err);
+        }
+
+        res.render('admin/site/site_tag_manage',{
+            list : doc
+        });
+    });
+}
+
+// 显示网址标签添加页面
+exports.showSiteTagAdd = function(req, res, next){
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    res.render('admin/site/site_tag_add');
+}
+
+// 网址标签添加
+exports.siteTagAdd = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    var name = sanitize(req.body.name).trim();
+
+    if (!name) {
+        req.flash('error','请输入标签名字');
+        return res.redirect('/site_tag_add');
+    }
+
+    var siteTag = new SiteTag();
+    siteTag.name = name;
+    siteTag.save(function (err) {
+        if (err) {
+            return next(err);
+        }
+        return res.redirect('/site_tag_manage');
+    });
+};
+
+// 网址标签删除
+exports.siteTagDel = function(req, res, next){
+    var tag_id = req.params.tid;
+
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    if (tag_id.length !== 24) {
+        req.flash('error','此记录不存在或已被删除。');
+        return res.redirect('/site_manage');
+    }
+
+    SiteTag.findOne({_id: tag_id}, function(err, doc) {
+        if (err) return next(err);
+
+        doc.remove(function(err){
+            if(err){
+                return next(err);
+            }
+
+            return res.redirect('/site_tag_manage');
+        });
+    });
 }

@@ -15,6 +15,8 @@ mongoose.connect(db, function (err) {
 // models
 require('./user');
 require('./site');
+require('./site_tag');
 
 exports.User = mongoose.model('user');
 exports.Site = mongoose.model('site');
+exports.SiteTag = mongoose.model('site_tag');

@@ -222,6 +222,11 @@ select{
     margin-top: 20px;
 }
 
+/* 网址标签添加 */
+.site-tag-add .union-form{
+    margin-top: 20px;
+}
+
 #footer{
     border-top: 1px solid #efefef;
     width: 1000px;

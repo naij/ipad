@@ -20,5 +20,7 @@ module.exports = function(app) {
     app.post('/site_add',admin.siteAdd);
     app.get('/site_del/sid=:sid',admin.siteDel);
     app.get('/site_tag_manage',admin.showSiteTagManage);
-
+    app.get('/site_tag_add',admin.showSiteTagAdd);
+    app.post('/site_tag_add',admin.siteTagAdd);
+    app.get('/site_tag_del/tid=:tid',admin.siteTagDel);
 }
