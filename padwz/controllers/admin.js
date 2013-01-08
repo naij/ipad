@@ -13,20 +13,27 @@ exports.showAdmin = function(req, res) {
     }
 
     Site.aggregate(
-        { 
+        {
             $group: {
-                _id: '$tag', 
-                expense: { $addToSet: '$imgname' }
+                _id: '$tag',
+                item: {
+                    $addToSet: {
+                        imgname:'$imgname',
+                        img : '$img',
+                        url : '$url',
+                        title : '$title'
+                    }
+                }
             }
         },
-        { 
+        {
             $project: {
-                _id: 1, 
-                expense: 1 
+                _id: 1,
+                item: 1
             }
         },
         function(err, summary) {
-            console.log(summary);
+            console.log(summary[0].item[0]);
         }
     );
 
@@ -231,6 +238,10 @@ exports.siteTagDel = function(req, res, next){
             if(err){
                 return next(err);
             }
+
+            Site.find({tag: tag_id},function(err, doc_2){
+                console.log(doc_2);
+            });
 
             return res.redirect('/site_tag_manage');
         });
