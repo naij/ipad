@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var sanitize = require('validator').sanitize;
+var EventProxy = require('eventproxy').EventProxy;
 var config = require('../config').config;
 var models = require('../models');
 var Site = models.Site;
@@ -33,7 +34,7 @@ exports.showAdmin = function(req, res) {
             }
         },
         function(err, summary) {
-            console.log(summary[0].item[0]);
+            //console.log(summary[0].item[0]);
         }
     );
 
@@ -142,30 +143,8 @@ exports.siteDel = function(req, res, next){
         return res.redirect('/site_manage');
     }
 
-    Site.findOne({_id: site_id}, function(err, doc) {
-        if (err) return next(err);
-
-        var filepath = path.join(config.upload_dir,doc.imgname);
-
-        doc.remove(function(err){
-            if(err){
-                return next(err);
-            }
-
-            fs.exists(filepath,function(exists){
-                if(exists){
-                    fs.unlink(filepath,function(err){
-                        if(err){
-                            return next(err);
-                        }
-                        return res.redirect('/site_manage');
-                    });
-                }
-                else{
-                    return res.redirect('/site_manage');
-                }
-            });
-        });
+    siteSingleDel(site_id,function(){
+        return res.redirect('/site_manage');
     });
 }
 
@@ -231,19 +210,55 @@ exports.siteTagDel = function(req, res, next){
         return res.redirect('/site_manage');
     }
 
-    SiteTag.findOne({_id: tag_id}, function(err, doc) {
+    var proxy = new EventProxy();
+
+    var done = function(){
+        return res.redirect('/site_tag_manage');
+    }
+
+    proxy.assign('tag_removed', 'site_removed', done);
+
+    SiteTag.remove({_id: tag_id}, function(err){
+        if(err){
+            return next(err);
+        }
+        proxy.trigger('tag_removed');
+    });
+
+    Site.remove({tag: tag_id}, function(err){
+        if(err){
+            return next(err);
+        }
+        proxy.trigger('site_removed');
+    });
+}
+
+function siteSingleDel(site_id,callback){
+
+
+    Site.findOne({_id: site_id}, function(err, doc) {
         if (err) return next(err);
+
+        var filepath = path.join(config.upload_dir,doc.imgname);
 
         doc.remove(function(err){
             if(err){
                 return next(err);
             }
 
-            Site.find({tag: tag_id},function(err, doc_2){
-                console.log(doc_2);
+            fs.exists(filepath,function(exists){
+                if(exists){
+                    fs.unlink(filepath,function(err){
+                        if(err){
+                            return next(err);
+                        }
+                        callback();
+                    });
+                }
+                else{
+                    callback();
+                }
             });
-
-            return res.redirect('/site_tag_manage');
         });
     });
 }
