@@ -1,13 +1,13 @@
 <div class="site" id="site">
     <div class="site-bd">
-        <% _.each(data.result,function(value, key, list){ %>
+        <% _.each(data,function(value, key, list){ %>
         <div class="panel">
             <div class="hd">
-                <div class="tag"><%= key %></div>
+                <div class="tag"><%= value._id %></div>
             </div>
             <div class="bd">
                 <ul class="clearfix">
-                    <% _.each(value,function(item){ %>
+                    <% _.each(value.item,function(item){ %>
                     <li><a href="<%= item.url %>" target="_blank" title="<%= item.title %>"><i></i><img src="<%= item.img %>" /></a></li>
                     <% }) %>
                 </ul>

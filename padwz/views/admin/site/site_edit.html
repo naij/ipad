@@ -7,6 +7,10 @@
             <input type="hidden" value="<%= site_id %>" name="sid">
             <ul class="union-form">
                 <li class="field">
+                    <label class="field-label">排序：</label>
+                    <input type="text" class="input" name="order" value="<%= site.order %>">
+                </li>
+                <li class="field">
                     <label class="field-label">标签：</label>
                     <select name="tag">
                         <% for (var i = 0, l = tags.length; i < l; i++) { %>

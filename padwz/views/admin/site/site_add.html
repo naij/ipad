@@ -6,6 +6,10 @@
         <form action="/site_add" enctype="multipart/form-data" method="post" id="addForm">
             <ul class="union-form">
                 <li class="field">
+                    <label class="field-label">排序：</label>
+                    <input type="text" class="input" name="order">
+                </li>
+                <li class="field">
                     <label class="field-label">标签：</label>
                     <select name="tag">
                         <% for (var i = 0, l = list.length; i < l; i++) { %>

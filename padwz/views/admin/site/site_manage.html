@@ -7,7 +7,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th colspan="4">
+                        <th colspan="5">
                             <a href="/site_add" class="btn btn-size25">新增网址</a>
                             <select id="J_tags" name="tid">
                                 <% if(tag_id == ''){ %>
@@ -29,6 +29,7 @@
                         <th width="120">图片</th>
                         <th width="120">标题</th>
                         <th>所属标签</th>
+                        <th width="70">排序值</th>
                         <th width="100">操作</th>
                     </tr>
                 </thead>
@@ -53,6 +54,7 @@
                                     无标签
                                 <% } %>
                             </td>
+                            <td><%= site[i].order %></td>
                             <td>
                                 <a href="/site_edit/sid=<%= site[i]._id %>" class="color-blue">编辑</a>
                                 <a href="/site_del/sid=<%= site[i]._id %>" class="color-blue">删除</a>

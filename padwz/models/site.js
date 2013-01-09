@@ -8,7 +8,7 @@ var SiteSchema = new Schema({
     url: { type: String },
     img: { type: String },
     imgname : { type: String },
-	tag: { type: String }
+	order: { type: Number }
 });
 
 mongoose.model('site', SiteSchema, 'site');

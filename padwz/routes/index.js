@@ -6,6 +6,9 @@ module.exports = function(app) {
     // 首页
     app.get('/', site.index);
 
+    // 网址
+    app.get('/site/list', site.list);
+
     // 账户
     app.get('/signin', sign.showLogin);
     app.post('/signin', sign.login);

@@ -4,7 +4,7 @@ define(function(require, exports, module) {
 
     var siteCollection = Backbone.Collection.extend({
         model : siteModel,
-        url : '/api/site.json'
+        url : '/site/list'
     });
 
     return siteCollection;

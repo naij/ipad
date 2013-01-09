@@ -13,31 +13,6 @@ exports.showAdmin = function(req, res) {
         return res.redirect('home');
     }
 
-    Site.aggregate(
-        {
-            $group: {
-                _id: '$tag',
-                item: {
-                    $addToSet: {
-                        imgname:'$imgname',
-                        img : '$img',
-                        url : '$url',
-                        title : '$title'
-                    }
-                }
-            }
-        },
-        {
-            $project: {
-                _id: 1,
-                item: 1
-            }
-        },
-        function(err, summary) {
-            //console.log(summary[0].item[0]);
-        }
-    );
-
     res.render('admin/admin');
 };
 
@@ -102,7 +77,7 @@ exports.showSiteAdd = function(req, res) {
         return res.redirect('home');
     }
 
-    SiteTag.find({},null,null,function(err, doc) {
+    SiteTag.find(function(err, doc) {
         if (err) {
             return next(err);
         }
@@ -121,11 +96,16 @@ exports.siteAdd = function(req, res) {
 
     var tag = req.body.tag.split(',')[0];
     var tagname = req.body.tag.split(',')[1];
+    var order = sanitize(req.body.order).trim();
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
     var img = req.files && req.files.img;
 
-    if (!title) {
+    if(!order){
+        req.flash('error','请输入排序值');
+        return res.redirect('/site_add');
+    }
+    else if(!title){
         req.flash('error','请输入标题');
         return res.redirect('/site_add');
     }
@@ -155,6 +135,7 @@ exports.siteAdd = function(req, res) {
                 var site = new Site();
                 site.tag = tag;
                 site.tagname = tagname;
+                site.order = order;
                 site.title = title;
                 site.url = url;
                 site.img = '/assets/upload/'+ filename;
@@ -215,10 +196,15 @@ exports.siteEdit = function(req, res) {
     var site_id = req.body.sid;
     var tag = req.body.tag.split(',')[0];
     var tagname = req.body.tag.split(',')[1];
+    var order = sanitize(req.body.order).trim();
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
 
-    if (!title) {
+    if(!order){
+        req.flash('error','请输入排序值');
+        return res.redirect('/site_add');
+    }
+    else if(!title) {
         req.flash('error','请输入标题');
         return res.redirect('/site_add');
     }
@@ -227,7 +213,13 @@ exports.siteEdit = function(req, res) {
         return res.redirect('/site_add');
     }
 
-    Site.update({_id: site_id},{tag: tag, tagname: tagname, title: title,url: url},function(err){
+    Site.update({_id: site_id},{
+        tag: tag, 
+        tagname: tagname,
+        order: order,
+        title: title,
+        url: url
+    },function(err){
         if(err){
             return next(err);
         }
@@ -330,7 +322,10 @@ exports.siteTagDel = function(req, res, next){
         proxy.trigger('tag_removed');
     });
 
-    Site.update({tag: tag_id}, {tag: '',tagname: ''}, function(err){
+    Site.update({tag: tag_id}, {
+        tag: '',
+        tagname: ''
+    }, function(err){
         if(err){
             return next(err);
         }
