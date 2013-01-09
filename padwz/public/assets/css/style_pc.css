@@ -13,7 +13,6 @@ a:hover{
     color: #06d;
 }
 
-
 select, input[type="checkbox"], input[type="radio"] {
     -webkit-appearance: none;
     -webkit-user-select: none;
@@ -200,6 +199,10 @@ select{
 .admin-guide .hd .title{
     float: left;
 }
+.admin-guide .hd .title a{
+    color: #505050;
+}
+
 .admin-guide .hd .extra{
     float: right;
 }

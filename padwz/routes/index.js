@@ -18,6 +18,8 @@ module.exports = function(app) {
     app.get('/site_manage',admin.showSiteManage);
     app.get('/site_add',admin.showSiteAdd);
     app.post('/site_add',admin.siteAdd);
+    app.get('/site_edit/sid=:sid',admin.showSiteEdit);
+    app.post('/site_edit',admin.siteEdit);
     app.get('/site_del/sid=:sid',admin.siteDel);
     app.get('/site_tag_manage',admin.showSiteTagManage);
     app.get('/site_tag_add',admin.showSiteTagAdd);

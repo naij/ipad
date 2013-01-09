@@ -1,15 +1,20 @@
 <div class="admin-guide site-add">
     <div class="hd clearfix">
-        <h3 class="title"><a href="/admin">后台设置</a>-网址添加</h3>
+        <h3 class="title"><a href="/admin">后台设置</a>-网址编辑</h3>
     </div>
     <div class="bd">
-        <form action="/site_add" enctype="multipart/form-data" method="post" id="addForm">
+        <form action="/site_edit" enctype="multipart/form-data" method="post" id="addForm">
+            <input type="hidden" value="<%= site_id %>" name="sid">
             <ul class="union-form">
                 <li class="field">
                     <label class="field-label">标签：</label>
                     <select name="tag">
-                        <% for (var i = 0, l = list.length; i < l; i++) { %>
-                            <option value="<%= list[i]._id %>,<%= list[i].name %>"><%= list[i].name %></option>
+                        <% for (var i = 0, l = tags.length; i < l; i++) { %>
+                            <% if(tags[i]._id == site.tag){ %>
+                                <option value="<%= tags[i]._id %>,<%= tags[i].name %>" selected><%= tags[i].name %></option>
+                            <% }else{ %>
+                                <option value="<%= tags[i]._id %>,<%= tags[i].name %>"><%= tags[i].name %></option>
+                            <% } %>
                         <% } %>
                     </select>
                 </li>
@@ -19,11 +24,11 @@
                 </li>
                 <li class="field">
                     <label class="field-label">标题：</label>
-                    <input type="text" class="input" name="title">
+                    <input type="text" class="input" name="title" value="<%= site.title %>">
                 </li>
                 <li class="field">
                     <label class="field-label">链接：</label>
-                    <input type="text" class="input" name="url" value="http://">
+                    <input type="text" class="input" name="url" value="<%= site.url %>">
                 </li>
                 <li class="field">
                     <label class="field-label">&nbsp;</label>

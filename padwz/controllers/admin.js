@@ -47,15 +47,53 @@ exports.showSiteManage = function(req, res) {
         return res.redirect('home');
     }
 
-    Site.find({},null,null,function(err, doc) {
-        if (err) {
-            return next(err);
-        }
+    var tag_id = req.query.tid;
+    var proxy = new EventProxy();
 
+    var done = function(site, tags){
         res.render('admin/site/site_manage',{
-            list : doc
+            tags : tags,
+            tag_id : tag_id,
+            site : site
         });
-    });
+    }
+
+    proxy.assign('site_query', 'tag_query', done);
+
+    if(tag_id){
+        Site.find({tag: tag_id},function(err,doc){
+            if (err) {
+                return next(err);
+            }
+
+            proxy.trigger('site_query',doc);
+        });
+
+        SiteTag.find(function(err, doc) {
+            if (err) {
+                return next(err);
+            }
+
+            proxy.trigger('tag_query',doc);
+        });
+    }
+    else{
+        Site.find(function(err,doc){
+            if (err) {
+                return next(err);
+            }
+
+            proxy.trigger('site_query',doc);
+        });
+
+        SiteTag.find(function(err, doc) {
+            if (err) {
+                return next(err);
+            }
+
+            proxy.trigger('tag_query',doc);
+        });
+    }
 };
 
 // 显示网站添加页面
@@ -81,7 +119,8 @@ exports.siteAdd = function(req, res) {
         return res.redirect('home');
     }
 
-    var tag = req.body.tag;
+    var tag = req.body.tag.split(',')[0];
+    var tagname = req.body.tag.split(',')[1];
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
     var img = req.files && req.files.img;
@@ -115,6 +154,7 @@ exports.siteAdd = function(req, res) {
 
                 var site = new Site();
                 site.tag = tag;
+                site.tagname = tagname;
                 site.title = title;
                 site.url = url;
                 site.img = '/assets/upload/'+ filename;
@@ -127,6 +167,71 @@ exports.siteAdd = function(req, res) {
                 });
             });
         }
+    });
+};
+
+// 显示网站编辑页面
+exports.showSiteEdit = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    var site_id = req.params.sid;
+    var proxy = new EventProxy();
+
+    var done = function(site, tags){
+        res.render('admin/site/site_edit',{
+            tags : tags,
+            site : site,
+            site_id : site_id
+        });
+    }
+
+    proxy.assign('site_query', 'tag_query', done);
+
+    Site.find({_id: site_id},function(err,doc){
+        if (err) {
+            return next(err);
+        }
+
+        proxy.trigger('site_query',doc[0]);
+    });
+
+    SiteTag.find(function(err, doc) {
+        if (err) {
+            return next(err);
+        }
+
+        proxy.trigger('tag_query',doc);
+    });
+};
+
+// 网站编辑
+exports.siteEdit = function(req, res) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    var site_id = req.body.sid;
+    var tag = req.body.tag.split(',')[0];
+    var tagname = req.body.tag.split(',')[1];
+    var title = sanitize(req.body.title).trim();
+    var url = sanitize(req.body.url).trim();
+
+    if (!title) {
+        req.flash('error','请输入标题');
+        return res.redirect('/site_add');
+    }
+    else if(!url){
+        req.flash('error','请输入链接');
+        return res.redirect('/site_add');
+    }
+
+    Site.update({_id: site_id},{tag: tag, tagname: tagname, title: title,url: url},function(err){
+        if(err){
+            return next(err);
+        }
+        return res.redirect('/site_manage');
     });
 };
 
@@ -225,7 +330,7 @@ exports.siteTagDel = function(req, res, next){
         proxy.trigger('tag_removed');
     });
 
-    Site.remove({tag: tag_id}, function(err){
+    Site.update({tag: tag_id}, {tag: '',tagname: ''}, function(err){
         if(err){
             return next(err);
         }
@@ -234,8 +339,6 @@ exports.siteTagDel = function(req, res, next){
 }
 
 function siteSingleDel(site_id,callback){
-
-
     Site.findOne({_id: site_id}, function(err, doc) {
         if (err) return next(err);
 
