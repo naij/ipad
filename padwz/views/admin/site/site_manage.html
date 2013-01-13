@@ -1,79 +1,45 @@
 <div class="admin-guide site-manage">
     <div class="hd clearfix">
-        <h3 class="title"><a href="/admin">后台设置</a>-网址管理</h3>
+        <h3 class="title"><a href="/admin">后台设置</a>&gt;<a href="/site_tag_manage">标签管理</a>&gt;“<%= list.tag%>”标签下的网址</h3>
     </div>
     <div class="bd">
-        <form action="/site_manage" method="get" id="J_manageForm">
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="5">
+                        <a href="/site_add/<%= list._id %>" class="btn btn-size25">新增网址</a>
+                    </th>
+                </tr>
+                <tr>
+                    <th width="120">图片</th>
+                    <th width="120">标题</th>
+                    <th>排序值</th>
+                    <th width="100">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(list.site.length == 0) { %>
                     <tr>
-                        <th colspan="5">
-                            <a href="/site_add" class="btn btn-size25">新增网址</a>
-                            <select id="J_tags" name="tid">
-                                <% if(tag_id == ''){ %>
-                                    <option value="" selected>所有标签</option>
-                                <% }else{ %>
-                                    <option value="">所有标签</option>
-                                <% } %>
-                                <% for (var i = 0, l = tags.length; i < l; i++) { %>
-                                    <% if(tags[i]._id == tag_id){ %>
-                                        <option value="<%= tags[i].id %>" selected><%= tags[i].name %></option>
-                                    <% }else{ %>
-                                        <option value="<%= tags[i].id %>"><%= tags[i].name %></option>
-                                    <% } %>
-                                <% } %>
-                            </select>
-                        </th>
+                        <td colspan="4" align="center">
+                            该标签下暂时没有网址
+                        </td>
                     </tr>
+                <% }else { %>
+                    <% for (var i = 0, l = list.site.length; i < l; i++) { %>
                     <tr>
-                        <th width="120">图片</th>
-                        <th width="120">标题</th>
-                        <th>所属标签</th>
-                        <th width="70">排序值</th>
-                        <th width="100">操作</th>
+                        <td>
+                            <img src="<%= list.site[i].img %>" alt="">
+                        </td>
+                        <td><%= list.site[i].title %></td>
+                        <td><%= list.site[i].order %></td>
+                        <td>
+                            <a href="/site_edit/<%= list._id %>/<%= list.site[i]._id %>" class="color-blue">编辑</a>
+                            <a href="/site_del/<%= list._id %>/<%= list.site[i]._id %>" class="color-blue">删除</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <% if(site.length == 0) { %>
-                        <tr>
-                            <td colspan="4" align="center">
-                                该标签下没有网站
-                            </td>
-                        </tr>
-                    <% }else { %>
-                        <% for (var i = 0, l = site.length; i < l; i++) { %>
-                        <tr>
-                            <td>
-                                <img src="<%= site[i].img %>" alt="">
-                            </td>
-                            <td><%= site[i].title %></td>
-                            <td>
-                                <% if(site[i].tagname) { %>
-                                    <%= site[i].tagname %>
-                                <% }else { %>
-                                    无标签
-                                <% } %>
-                            </td>
-                            <td><%= site[i].order %></td>
-                            <td>
-                                <a href="/site_edit/sid=<%= site[i]._id %>" class="color-blue">编辑</a>
-                                <a href="/site_del/sid=<%= site[i]._id %>" class="color-blue">删除</a>
-                            </td>
-                        </tr>
-                        <% } %>
                     <% } %>
-                </tbody>
-            </table>
-        </form>
+                <% } %>
+            </tbody>
+        </table>
     </div>
-
-    <script type="text/javascript">
-        seajs.use(['jquery'],function($){
-            $(function(){
-                $('#J_tags').change(function(e){
-                    $('#J_manageForm').submit();
-                });
-            });
-        });
-    </script>
 </div>

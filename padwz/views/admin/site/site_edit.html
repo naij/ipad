@@ -1,26 +1,15 @@
 <div class="admin-guide site-add">
     <div class="hd clearfix">
-        <h3 class="title"><a href="/admin">后台设置</a>-网址编辑</h3>
+        <h3 class="title"><a href="/admin">后台设置</a>&gt;<a href="/site_tag_manage">标签管理</a>&gt;网址编辑</h3>
     </div>
     <div class="bd">
         <form action="/site_edit" enctype="multipart/form-data" method="post" id="addForm">
-            <input type="hidden" value="<%= site_id %>" name="sid">
+            <input type="hidden" value="<%= tid %>" name="tid">
+            <input type="hidden" value="<%= sid %>" name="sid">
             <ul class="union-form">
                 <li class="field">
                     <label class="field-label">排序：</label>
                     <input type="text" class="input" name="order" value="<%= site.order %>">
-                </li>
-                <li class="field">
-                    <label class="field-label">标签：</label>
-                    <select name="tag">
-                        <% for (var i = 0, l = tags.length; i < l; i++) { %>
-                            <% if(tags[i]._id == site.tag){ %>
-                                <option value="<%= tags[i]._id %>,<%= tags[i].name %>" selected><%= tags[i].name %></option>
-                            <% }else{ %>
-                                <option value="<%= tags[i]._id %>,<%= tags[i].name %>"><%= tags[i].name %></option>
-                            <% } %>
-                        <% } %>
-                    </select>
                 </li>
                 <li class="field">
                     <label class="field-label">图片：</label>

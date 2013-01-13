@@ -1,6 +1,6 @@
 <div class="admin-guide site-manage">
     <div class="hd clearfix">
-        <h3 class="title"><a href="/admin">后台设置</a>-标签管理</h3>
+        <h3 class="title"><a href="/admin">后台设置</a>&gt;标签管理</h3>
     </div>
     <div class="bd">
         <table class="table">
@@ -12,7 +12,7 @@
                 </tr>
                 <tr>
                     <th width="120">标签名称</th>
-                    <th>标签id</th>
+                    <th>标签排序</th>
                     <th width="100">操作</th>
                 </tr>
             </thead>
@@ -26,11 +26,11 @@
                 <% }else { %>
                     <% for (var i = 0, l = list.length; i < l; i++) { %>
                     <tr>
-                        <td><%= list[i].name %></td>
-                        <td><%= list[i]._id %></td>
+                        <td><a href="/site_manage/<%= list[i]._id %>"><%= list[i].tag %></a></td>
+                        <td><%= list[i].order %></td>
                         <td>
-                            <a href="/site_tag_edit/tid=<%= list[i]._id %>" class="color-blue">编辑</a>
-                            <a href="/site_tag_del/tid=<%= list[i]._id %>" class="color-blue">删除</a>
+                            <a href="/site_tag_edit/<%= list[i]._id %>" class="color-blue">编辑</a>
+                            <a href="/site_tag_del/<%= list[i]._id %>" class="color-blue">删除</a>
                         </td>
                     </tr>
                     <% } %>

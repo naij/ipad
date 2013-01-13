@@ -18,14 +18,14 @@ module.exports = function(app) {
 
     // 后台
     app.get('/admin', admin.showAdmin);
-    app.get('/site_manage',admin.showSiteManage);
-    app.get('/site_add',admin.showSiteAdd);
+    app.get('/site_manage/:tid',admin.showSiteManage);
+    app.get('/site_add/:tid',admin.showSiteAdd);
     app.post('/site_add',admin.siteAdd);
-    app.get('/site_edit/sid=:sid',admin.showSiteEdit);
+    app.get('/site_edit/:tid/:sid',admin.showSiteEdit);
     app.post('/site_edit',admin.siteEdit);
-    app.get('/site_del/sid=:sid',admin.siteDel);
+    app.get('/site_del/:tid/:sid',admin.siteDel);
     app.get('/site_tag_manage',admin.showSiteTagManage);
     app.get('/site_tag_add',admin.showSiteTagAdd);
     app.post('/site_tag_add',admin.siteTagAdd);
-    app.get('/site_tag_del/tid=:tid',admin.siteTagDel);
+    app.get('/site_tag_del/:tid',admin.siteTagDel);
 }

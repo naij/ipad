@@ -5,7 +5,6 @@ var EventProxy = require('eventproxy').EventProxy;
 var config = require('../config').config;
 var models = require('../models');
 var Site = models.Site;
-var SiteTag = models.SiteTag;
 
 // 显示后台管理页面
 exports.showAdmin = function(req, res) {
@@ -22,53 +21,17 @@ exports.showSiteManage = function(req, res) {
         return res.redirect('home');
     }
 
-    var tag_id = req.query.tid;
-    var proxy = new EventProxy();
+    var tid = req.params.tid;
 
-    var done = function(site, tags){
+    Site.findOne({_id: tid},function(err,doc){
+        if (err) {
+            return next(err);
+        }
+
         res.render('admin/site/site_manage',{
-            tags : tags,
-            tag_id : tag_id,
-            site : site
+            list : doc
         });
-    }
-
-    proxy.assign('site_query', 'tag_query', done);
-
-    if(tag_id){
-        Site.find({tag: tag_id},function(err,doc){
-            if (err) {
-                return next(err);
-            }
-
-            proxy.trigger('site_query',doc);
-        });
-
-        SiteTag.find(function(err, doc) {
-            if (err) {
-                return next(err);
-            }
-
-            proxy.trigger('tag_query',doc);
-        });
-    }
-    else{
-        Site.find(function(err,doc){
-            if (err) {
-                return next(err);
-            }
-
-            proxy.trigger('site_query',doc);
-        });
-
-        SiteTag.find(function(err, doc) {
-            if (err) {
-                return next(err);
-            }
-
-            proxy.trigger('tag_query',doc);
-        });
-    }
+    });
 };
 
 // 显示网站添加页面
@@ -77,14 +40,10 @@ exports.showSiteAdd = function(req, res) {
         return res.redirect('home');
     }
 
-    SiteTag.find(function(err, doc) {
-        if (err) {
-            return next(err);
-        }
+    var tid = req.params.tid;
 
-        res.render('admin/site/site_add',{
-            list : doc
-        });
+    res.render('admin/site/site_add',{
+        tid: tid
     });
 };
 
@@ -94,8 +53,7 @@ exports.siteAdd = function(req, res) {
         return res.redirect('home');
     }
 
-    var tag = req.body.tag.split(',')[0];
-    var tagname = req.body.tag.split(',')[1];
+    var tid = req.body.tid;
     var order = sanitize(req.body.order).trim();
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
@@ -132,19 +90,22 @@ exports.siteAdd = function(req, res) {
                     return next(err);
                 }
 
-                var site = new Site();
-                site.tag = tag;
-                site.tagname = tagname;
-                site.order = order;
-                site.title = title;
-                site.url = url;
-                site.img = '/assets/upload/'+ filename;
-                site.imgname = filename;
-                site.save(function (err) {
+                Site.update({_id: tid},{
+                    $push:{
+                        "site":{
+                            title: title,
+                            url: url,
+                            img: '/assets/upload/'+ filename,
+                            imgname: filename,
+                            order: order
+                        }
+                    }
+                },function(err){
                     if (err) {
                         return next(err);
                     }
-                    return res.redirect('/site_manage');
+
+                    return res.redirect('/site_manage/' + tid);
                 });
             });
         }
@@ -157,33 +118,26 @@ exports.showSiteEdit = function(req, res) {
         return res.redirect('home');
     }
 
-    var site_id = req.params.sid;
-    var proxy = new EventProxy();
+    var tid = req.params.tid;
+    var sid = req.params.sid;
 
-    var done = function(site, tags){
+    Site.findOne({_id: tid},{
+        _id: 0,
+        site: { 
+            $elemMatch: { 
+                _id: sid 
+            }
+        }
+    },function(err,doc){
+        if (err) {
+            return next(err);
+        }
+
         res.render('admin/site/site_edit',{
-            tags : tags,
-            site : site,
-            site_id : site_id
+            site : doc.site[0],
+            tid : tid,
+            sid : sid
         });
-    }
-
-    proxy.assign('site_query', 'tag_query', done);
-
-    Site.find({_id: site_id},function(err,doc){
-        if (err) {
-            return next(err);
-        }
-
-        proxy.trigger('site_query',doc[0]);
-    });
-
-    SiteTag.find(function(err, doc) {
-        if (err) {
-            return next(err);
-        }
-
-        proxy.trigger('tag_query',doc);
     });
 };
 
@@ -193,9 +147,8 @@ exports.siteEdit = function(req, res) {
         return res.redirect('home');
     }
 
-    var site_id = req.body.sid;
-    var tag = req.body.tag.split(',')[0];
-    var tagname = req.body.tag.split(',')[1];
+    var tid = req.body.tid;
+    var sid = req.body.sid;
     var order = sanitize(req.body.order).trim();
     var title = sanitize(req.body.title).trim();
     var url = sanitize(req.body.url).trim();
@@ -213,35 +166,36 @@ exports.siteEdit = function(req, res) {
         return res.redirect('/site_add');
     }
 
-    Site.update({_id: site_id},{
-        tag: tag, 
-        tagname: tagname,
-        order: order,
-        title: title,
-        url: url
+    Site.update({_id: tid,"site._id": sid},{
+        $set: {
+            "site.$.order": order,
+            "site.$.title": title,
+            "site.$.url": url
+        }
     },function(err){
         if(err){
             return next(err);
         }
-        return res.redirect('/site_manage');
+        return res.redirect('/site_manage/' + tid);
     });
 };
 
 // 网站删除
 exports.siteDel = function(req, res, next){
-    var site_id = req.params.sid;
+    var tid = req.params.tid;
+    var sid = req.params.sid;
 
     if (!req.session.user) {
         return res.redirect('home');
     }
 
-    if (site_id.length !== 24) {
+    if (sid.length !== 24) {
         req.flash('error','此记录不存在或已被删除。');
         return res.redirect('/site_manage');
     }
 
-    siteSingleDel(site_id,function(){
-        return res.redirect('/site_manage');
+    siteSingleDel(tid, sid, function(){
+        return res.redirect('/site_manage/' + tid);
     });
 }
 
@@ -251,7 +205,7 @@ exports.showSiteTagManage = function(req, res, next){
         return res.redirect('home');
     }
 
-    SiteTag.find({},null,null,function(err, doc) {
+    Site.find(function(err, doc) {
         if (err) {
             return next(err);
         }
@@ -277,16 +231,22 @@ exports.siteTagAdd = function(req, res) {
         return res.redirect('home');
     }
 
-    var name = sanitize(req.body.name).trim();
+    var tag = sanitize(req.body.tag).trim();
+    var order = sanitize(req.body.order).trim();
 
-    if (!name) {
+    if (!tag) {
         req.flash('error','请输入标签名字');
         return res.redirect('/site_tag_add');
     }
+    else if(!order){
+        req.flash('error','请输入标签排序');
+        return res.redirect('/site_tag_add');
+    }
 
-    var siteTag = new SiteTag();
-    siteTag.name = name;
-    siteTag.save(function (err) {
+    var site = new Site();
+    site.tag = tag;
+    site.order = order;
+    site.save(function (err) {
         if (err) {
             return next(err);
         }
@@ -296,67 +256,63 @@ exports.siteTagAdd = function(req, res) {
 
 // 网址标签删除
 exports.siteTagDel = function(req, res, next){
-    var tag_id = req.params.tid;
+    var tid = req.params.tid;
 
     if (!req.session.user) {
         return res.redirect('home');
     }
 
-    if (tag_id.length !== 24) {
+    if (tid.length !== 24) {
         req.flash('error','此记录不存在或已被删除。');
-        return res.redirect('/site_manage');
-    }
-
-    var proxy = new EventProxy();
-
-    var done = function(){
         return res.redirect('/site_tag_manage');
     }
 
-    proxy.assign('tag_removed', 'site_removed', done);
-
-    SiteTag.remove({_id: tag_id}, function(err){
+    Site.remove({_id: tid}, function(err){
         if(err){
             return next(err);
         }
-        proxy.trigger('tag_removed');
-    });
-
-    Site.update({tag: tag_id}, {
-        tag: '',
-        tagname: ''
-    }, function(err){
-        if(err){
-            return next(err);
-        }
-        proxy.trigger('site_removed');
+        return res.redirect('/site_tag_manage');
     });
 }
 
-function siteSingleDel(site_id,callback){
-    Site.findOne({_id: site_id}, function(err, doc) {
-        if (err) return next(err);
-
-        var filepath = path.join(config.upload_dir,doc.imgname);
-
-        doc.remove(function(err){
-            if(err){
-                return next(err);
+function siteSingleDel(tid, sid, callback){
+    Site.update({_id: tid},{
+        $pull: {
+            "site": {
+                "_id": sid
             }
+        }
+    },function(err){
+        if (err) {
+            return next(err);
+        }
 
-            fs.exists(filepath,function(exists){
-                if(exists){
-                    fs.unlink(filepath,function(err){
-                        if(err){
-                            return next(err);
-                        }
-                        callback();
-                    });
-                }
-                else{
-                    callback();
-                }
-            });
-        });
+        callback();
     });
+
+    // Site.findOne({_id: site_id}, function(err, doc) {
+    //     if (err) return next(err);
+
+    //     var filepath = path.join(config.upload_dir,doc.imgname);
+
+    //     doc.remove(function(err){
+    //         if(err){
+    //             return next(err);
+    //         }
+
+    //         fs.exists(filepath,function(exists){
+    //             if(exists){
+    //                 fs.unlink(filepath,function(err){
+    //                     if(err){
+    //                         return next(err);
+    //                     }
+    //                     callback();
+    //                 });
+    //             }
+    //             else{
+    //                 callback();
+    //             }
+    //         });
+    //     });
+    // });
 }

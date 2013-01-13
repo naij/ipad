@@ -3,11 +3,11 @@
         <% _.each(data,function(value, key, list){ %>
         <div class="panel">
             <div class="hd">
-                <div class="tag"><%= value._id %></div>
+                <div class="tag"><%= value.tag %></div>
             </div>
             <div class="bd">
                 <ul class="clearfix">
-                    <% _.each(value.item,function(item){ %>
+                    <% _.each(value.site,function(item){ %>
                     <li><a href="<%= item.url %>" target="_blank" title="<%= item.title %>"><i></i><img src="<%= item.img %>" /></a></li>
                     <% }) %>
                 </ul>
