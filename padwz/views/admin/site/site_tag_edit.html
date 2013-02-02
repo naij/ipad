@@ -1,0 +1,35 @@
+<div class="admin-guide site-add">
+    <div class="hd clearfix">
+        <h3 class="title"><a href="/admin">后台设置</a>&gt;<a href="/site_tag_manage">标签管理</a>&gt;标签编辑</h3>
+    </div>
+    <div class="bd">
+        <form action="/site_tag_edit" enctype="multipart/form-data" method="post" id="addForm">
+            <input type="hidden" value="<%= tid %>" name="tid">
+            <ul class="union-form">
+                <li class="field">
+                    <label class="field-label">标签名称：</label>
+                    <input type="text" class="input" name="tag" value="<%= site.tag %>">
+                </li>
+                <li class="field">
+                    <label class="field-label">标签排序：</label>
+                    <input type="text" class="input" name="order" value="<%= site.order %>">
+                </li>
+                <li class="field">
+                    <label class="field-label">&nbsp;</label>
+                    <a href="#" id="submit" class="btn btn-size25">提交</a>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        seajs.use(['jquery'],function($){
+            $(function(){
+                $('#submit').click(function(e){
+                    e.preventDefault();
+                    $('#addForm').submit();
+                });
+            });
+        });
+    </script>
+</div>

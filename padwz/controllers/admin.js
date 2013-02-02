@@ -7,7 +7,7 @@ var models = require('../models');
 var Site = models.Site;
 
 // 显示后台管理页面
-exports.showAdmin = function(req, res) {
+exports.showAdmin = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -16,7 +16,7 @@ exports.showAdmin = function(req, res) {
 };
 
 // 显示网站管理页面
-exports.showSiteManage = function(req, res) {
+exports.showSiteManage = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -35,7 +35,7 @@ exports.showSiteManage = function(req, res) {
 };
 
 // 显示网站添加页面
-exports.showSiteAdd = function(req, res) {
+exports.showSiteAdd = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -48,7 +48,7 @@ exports.showSiteAdd = function(req, res) {
 };
 
 // 网站添加
-exports.siteAdd = function(req, res) {
+exports.siteAdd = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -76,44 +76,37 @@ exports.siteAdd = function(req, res) {
         return res.redirect('/site_add');
     }
 
-    var filename = img.name;
+    var filename = new Date().getTime() + '.png';
     var savepath = path.join(config.upload_dir, filename);
 
-    fs.exists(savepath,function(exists){
-        if(exists){
-            req.flash('error','图片已存在，请重新上传');
-            return res.redirect('/site_add');
+    fs.rename(img.path, savepath, function (err) {
+        if (err) {
+            return next(err);
         }
-        else{
-            fs.rename(img.path, savepath, function (err) {
-                if (err) {
-                    return next(err);
+
+        Site.update({_id: tid},{
+            $push:{
+                "site":{
+                    title: title,
+                    url: url,
+                    img: '/assets/upload/'+ filename,
+                    imgname: filename,
+                    order: order
                 }
+            }
+        },function(err){
+            if (err) {
+                return next(err);
+            }
 
-                Site.update({_id: tid},{
-                    $push:{
-                        "site":{
-                            title: title,
-                            url: url,
-                            img: '/assets/upload/'+ filename,
-                            imgname: filename,
-                            order: order
-                        }
-                    }
-                },function(err){
-                    if (err) {
-                        return next(err);
-                    }
-
-                    return res.redirect('/site_manage/' + tid);
-                });
-            });
-        }
+            return res.redirect('/site_manage/' + tid);
+        });
     });
+
 };
 
 // 显示网站编辑页面
-exports.showSiteEdit = function(req, res) {
+exports.showSiteEdit = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -142,7 +135,7 @@ exports.showSiteEdit = function(req, res) {
 };
 
 // 网站编辑
-exports.siteEdit = function(req, res) {
+exports.siteEdit = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -194,7 +187,17 @@ exports.siteDel = function(req, res, next){
         return res.redirect('/site_manage');
     }
 
-    siteSingleDel(tid, sid, function(){
+    Site.update({_id: tid},{
+        $pull: {
+            "site": {
+                "_id": sid
+            }
+        }
+    },function(err){
+        if (err) {
+            return next(err);
+        }
+
         return res.redirect('/site_manage/' + tid);
     });
 }
@@ -226,7 +229,7 @@ exports.showSiteTagAdd = function(req, res, next){
 }
 
 // 网址标签添加
-exports.siteTagAdd = function(req, res) {
+exports.siteTagAdd = function(req, res, next) {
     if (!req.session.user) {
         return res.redirect('home');
     }
@@ -274,6 +277,53 @@ exports.siteTagDel = function(req, res, next){
         return res.redirect('/site_tag_manage');
     });
 }
+
+// 显示网址标签编辑页面
+exports.showSiteTagEdit = function(req, res, next){
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    var tid = req.params.tid;
+
+    Site.findOne({_id: tid},function(err,doc){
+        if (err) {
+            return next(err);
+        }
+
+        res.render('admin/site/site_tag_edit',{
+            site : doc,
+            tid : tid
+        });
+    });
+}
+
+// 网站标签编辑
+exports.siteTagEdit = function(req, res, next) {
+    if (!req.session.user) {
+        return res.redirect('home');
+    }
+
+    var tid = req.body.tid;
+    var order = sanitize(req.body.order).trim();
+    var tag = sanitize(req.body.tag).trim();
+
+    if (!tag) {
+        req.flash('error','请输入标签名字');
+        return res.redirect('/site_tag_add');
+    }
+    else if(!order){
+        req.flash('error','请输入标签排序');
+        return res.redirect('/site_tag_add');
+    }
+
+    Site.update({_id: tid},{tag:tag,order:order},function(err){
+        if(err){
+            return next(err);
+        }
+        return res.redirect('/site_tag_manage');
+    });
+};
 
 function siteSingleDel(tid, sid, callback){
     Site.update({_id: tid},{

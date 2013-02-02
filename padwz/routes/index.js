@@ -27,5 +27,7 @@ module.exports = function(app) {
     app.get('/site_tag_manage',admin.showSiteTagManage);
     app.get('/site_tag_add',admin.showSiteTagAdd);
     app.post('/site_tag_add',admin.siteTagAdd);
+    app.get('/site_tag_edit/:tid',admin.showSiteTagEdit);
+    app.post('/site_tag_edit',admin.siteTagEdit);
     app.get('/site_tag_del/:tid',admin.siteTagDel);
 }
