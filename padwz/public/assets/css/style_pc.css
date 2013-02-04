@@ -211,8 +211,15 @@ select{
 .admin-guide .guide-list li{
     padding: 10px 20px;
 }
-.admin-guide .guide-list li:hover{
-    background-color: #f6f6f6;
+.admin-guide .guide-list li a{
+    background-color: #efefef;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    width: 80px;
+    text-align: center;
 }
 
 /* 网址设置 */

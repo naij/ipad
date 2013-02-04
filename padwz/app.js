@@ -63,6 +63,6 @@ app.dynamicHelpers({
 // Routes
 routes(app);
 
-app.listen(3000);
+app.listen(3000,'192.168.1.2');
 
 console.log("app start");
