@@ -3,20 +3,25 @@ var models = require('../models');
 var Site = models.Site;
 
 exports.index = function(req, res, next) {
-    // if(util.user_agent(req)){
-    //     // 移动端
-    //     res.render('index_ipad', {
-    //         layout: 'layout_ipad'
-    //     });
-    // }
-    // else{
-    //     // pc端
-    //     res.render('index');
-    // }
+    if(util.user_agent(req)){
+        // 移动端
+        res.render('index_ipad', {
+            layout: 'layout_ipad'
+        });
+    }
+    else{
+        // pc端
+        Site.find().sort({order : 1}).exec(function(err, doc) {
+            console.log(doc);
+            res.render('index',{
+                list : doc 
+            });
+        });
+    }
 
-    res.render('index_ipad', {
-        layout: 'layout_ipad'
-    });
+    // res.render('index_ipad', {
+    //     layout: 'layout_ipad'
+    // });
 };
 
 // 网址列表

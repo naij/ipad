@@ -136,6 +136,10 @@ select{
     color: #C09853;
 }
 
+body{
+    background-color: #f9f9f9;
+}
+
 /* header */
 #header{
     background: #262626;
@@ -174,6 +178,18 @@ select{
     width: 1000px;
     margin: 20px auto;
 }
+
+/* 首页 */
+.site-cnt{}
+.site-cnt li{
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+
 
 /* 登录 */
 .signin .hd{
@@ -245,5 +261,6 @@ select{
     padding: 20px 0;
 }
 #footer a{
+    color: #999;
     margin: 0 10px;
 }
