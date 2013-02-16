@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+
 /* 时间格式化 */
 exports.format_date = function(date, friendly) {
     var year = date.getFullYear();
@@ -69,4 +71,12 @@ exports.user_agent = function(req){
     }
 
     return false;
+}
+
+// md5加密
+exports.md5 = function(str) {
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(str);
+    str = md5sum.digest('hex');
+    return str;
 }

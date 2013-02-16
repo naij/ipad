@@ -3,6 +3,8 @@ var path = require('path');
 var sanitize = require('validator').sanitize;
 var EventProxy = require('eventproxy').EventProxy;
 var config = require('../config').config;
+var upyun = require('../models/upyun').upyun;
+var util = require('../libs/util');
 var models = require('../models');
 var Site = models.Site;
 
@@ -67,33 +69,44 @@ exports.siteAdd = function(req, res, next) {
         return res.redirect('/site_add');
     }
 
-    var filename = new Date().getTime() + '.png';
-    var savepath = path.join(config.upload_dir, filename);
+    var filename = img.name;
+    var extension = filename.substr(filename.lastIndexOf('.'), filename.length);
+    var imgname = util.md5((new Date()).getTime().toString()) + extension;
 
-    fs.rename(img.path, savepath, function (err) {
+    console.log(imgname);
+    console.log(img);
+
+    var render = function () {
+        return res.redirect('/site_manage/' + tid);
+    };
+
+    var proxy = new EventProxy();
+    proxy.assign('file_upload', 'data_update', render);
+
+    // 上传到又拍云
+    upyun.writeFile('/site/' + imgname, fs.readFileSync(img.path), true, function(err, data){
+        if (!err) {
+            proxy.trigger('file_upload');
+        }
+    });
+
+    // 保存到数据库
+    Site.update({_id: tid},{
+        $push:{
+            "site":{
+                title: title,
+                url: url,
+                img: '/site/' + imgname,
+                order: order
+            }
+        }
+    },function(err){
         if (err) {
             return next(err);
         }
 
-        Site.update({_id: tid},{
-            $push:{
-                "site":{
-                    title: title,
-                    url: url,
-                    img: '/assets/upload/'+ filename,
-                    imgname: filename,
-                    order: order
-                }
-            }
-        },function(err){
-            if (err) {
-                return next(err);
-            }
-
-            return res.redirect('/site_manage/' + tid);
-        });
+        proxy.trigger('data_update');
     });
-
 };
 
 // 显示网站编辑页面

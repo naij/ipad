@@ -4,7 +4,7 @@
         <% for (var j = 0, l_s = list[i].site.length; j < l_s; j++) { %>
         <li>
             <a href="<%= list[i].site[j].url %>" title="<%= list[i].site[j].title %>" target="_blank">
-                <img src="<%= list[i].site[j].img %>" alt="">
+                <img src="<%= config.upyun_path %><%= list[i].site[j].img %>" alt="">
             </a>
         </li>
         <% } %>

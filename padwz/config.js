@@ -1,9 +1,6 @@
 /**
- * config
+ * 应用配置文件
  */
-
-var path = require('path');
-
 exports.config = {
     debug: true,
     name: 'Pad导航',
@@ -42,10 +39,15 @@ exports.config = {
         return generate_mongo_url(mongo);
     },
 
-    upload_dir: path.join(__dirname, 'public', 'assets', 'upload'),
-
+    // session && cookie
     session_secret: 'ipadwz',
   	auth_cookie_name: 'ipadwz',
+
+    // 又拍云账户
+    upyun_buckname : 'padwz',
+    upyun_username : 'wolongxzg',
+    upyun_password : 'wang354438',
+    upyun_path : 'http://padwz.b0.upaiyun.com/',
 
   	// admin 管理员权限
   	admins: { admin: true }

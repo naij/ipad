@@ -12,7 +12,6 @@ exports.index = function(req, res, next) {
     else{
         // pc端
         Site.find().sort({order : 1}).exec(function(err, doc) {
-            console.log(doc);
             res.render('index',{
                 list : doc 
             });

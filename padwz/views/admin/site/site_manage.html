@@ -28,7 +28,7 @@
                     <% for (var i = 0, l = list.site.length; i < l; i++) { %>
                     <tr>
                         <td>
-                            <img src="<%= list.site[i].img %>" alt="">
+                            <img src="<%= config.upyun_path %><%= list.site[i].img %>" alt="">
                         </td>
                         <td><%= list.site[i].title %></td>
                         <td><%= list.site[i].order %></td>
