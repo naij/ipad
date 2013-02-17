@@ -212,7 +212,7 @@ exports.showSiteTagManage = function(req, res, next){
         return res.redirect('home');
     }
 
-    Site.find(function(err, doc) {
+    Site.find().sort({order : 1}).exec(function(err, doc) {
         if (err) {
             return next(err);
         }

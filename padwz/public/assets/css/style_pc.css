@@ -137,7 +137,7 @@ select{
 }
 
 body{
-    background-color: #f9f9f9;
+    background-color: #f2f2f2;
 }
 
 /* header */
@@ -175,22 +175,55 @@ body{
 
 /* content */
 #content{
-    width: 1000px;
-    margin: 20px auto;
+    /*width: 1000px;
+    margin: 20px auto;*/
 }
 
 /* 首页 */
-.site-cnt{}
+.site-cnt{
+    
+}
+.site-cnt .site-bd{
+    width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0;
+    overflow: hidden;
+}
+.site-cnt .list-hd{
+    margin-bottom: 15px;
+}
+.site-cnt .list-hd h3{
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+.site-cnt ul{
+    width: 1025px;
+}
 .site-cnt li{
     background: #fff;
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
     float: left;
-    margin: 0 20px 20px 0;
-    padding: 20px;
+    margin: 0 25px 25px 0;
+    padding: 20px 15px;
 }
-
-
+.site-cnt li img{
+    height: 60px;
+    width: 150px;
+}
+.site-cnt-0{
+    background-color: #76b3ff;
+}
+.site-cnt-1{
+    background-color: #e8490d;
+}
+.site-cnt-2{
+    background-color: #fcb541;
+}
+.site-cnt-3{
+    background-color: #008eb0;
+}
 
 /* 登录 */
 .signin .hd{
@@ -204,26 +237,31 @@ body{
 
 /* 后台 */
 .admin-guide{
-    border: 1px solid #ddd;
-    border-radius: 2px;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+    /*border: 1px solid #ddd;
+    border-radius: 2px;*/
 }
 .admin-guide .hd{
-    background-color: #efefef;
+    background-color: #31669c;
     border-bottom: 1px solid #ddd;
     font-size: 14px;
     padding: 5px 10px;
 }
 .admin-guide .hd .title{
+    color: #FFF;
     float: left;
 }
 .admin-guide .hd .title a{
-    color: #505050;
+    color: #FFF;
 }
 
 .admin-guide .hd .extra{
     float: right;
 }
 .admin-guide .bd{
+    background-color: #FFF;
 }
 .admin-guide .guide-list li{
     padding: 10px 20px;
@@ -246,12 +284,12 @@ body{
 
 /* 网址添加 */
 .site-add .union-form{
-    margin-top: 20px;
+    padding: 20px 0;
 }
 
 /* 网址标签添加 */
 .site-tag-add .union-form{
-    margin-top: 20px;
+    padding: 20px 0;
 }
 
 #footer{
