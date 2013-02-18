@@ -16,9 +16,7 @@ app.configure(function(){
     app.set('view engine', 'html');
     app.register('.html', ejs);
     //app.set('view options', {layout: false});
-    app.use(express.bodyParser({
-        uploadDir: config.upload_dir
-    }));
+    app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());

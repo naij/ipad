@@ -70,11 +70,9 @@ exports.siteAdd = function(req, res, next) {
     }
 
     var filename = img.name;
+    var temppath = img.path;
     var extension = filename.substr(filename.lastIndexOf('.'), filename.length);
     var imgname = util.md5((new Date()).getTime().toString()) + extension;
-
-    console.log(imgname);
-    console.log(img);
 
     var render = function () {
         return res.redirect('/site_manage/' + tid);
@@ -84,9 +82,14 @@ exports.siteAdd = function(req, res, next) {
     proxy.assign('file_upload', 'data_update', render);
 
     // 上传到又拍云
-    upyun.writeFile('/site/' + imgname, fs.readFileSync(img.path), true, function(err, data){
+    upyun.writeFile('/site/' + imgname, fs.readFileSync(temppath), true, function(err, data){
         if (!err) {
-            proxy.trigger('file_upload');
+            fs.unlink(temppath, function() {
+                if (err) {
+                    return next(err);
+                }
+                proxy.trigger('file_upload');
+            });
         }
     });
 
