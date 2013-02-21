@@ -10,16 +10,8 @@ define(function(require, exports, module) {
             self.options = options || {};
             self.index = self.options.startSlide || 0;
             self.speed = self.options.speed || 300;
-            
-            var winHeight = $(window).height();
-            var hdHeight = $('#header').height();
-
-            $('#content').height(winHeight - hdHeight);
-            $('#content').css('overflow','hidden');
-            $('.site-cnt').height(winHeight - hdHeight);
-
-            self.length = $('.site-cnt').length;
-            self.height = winHeight - hdHeight;
+            self.height = self.options.height;
+            self.length = self.options.length;
 
             self.bindUI();
         },

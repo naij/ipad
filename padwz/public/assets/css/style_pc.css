@@ -146,8 +146,8 @@ body{
     height: 50px;
 }
 .header-bd{
-    width: 1000px;
-    margin: 0 auto;
+    /*width: 1000px;*/
+    margin: 0 20px;
     position: relative;
 }
 .header-bd .logo{
@@ -184,9 +184,7 @@ body{
     
 }
 .site-cnt .site-bd{
-    width: 1000px;
     margin: 0 auto;
-    padding: 60px 0;
     overflow: hidden;
 }
 .site-cnt .list-hd{
@@ -194,11 +192,7 @@ body{
 }
 .site-cnt .list-hd h3{
     color: #FFF;
-    font-size: 18px;
-    font-weight: bold;
-}
-.site-cnt ul{
-    width: 1025px;
+    font-size: 24px;
 }
 .site-cnt li{
     background: #fff;
@@ -206,17 +200,22 @@ body{
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
     float: left;
     margin: 0 25px 25px 0;
-    padding: 20px 15px;
+}
+.site-cnt li a{
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
 }
 .site-cnt li img{
     height: 60px;
     width: 150px;
+    vertical-align: middle;
 }
 .site-cnt-0{
     background-color: #76b3ff;
 }
 .site-cnt-1{
-    background-color: #e8490d;
+    background-color: #f67e00;
 }
 .site-cnt-2{
     background-color: #fcb541;
@@ -225,7 +224,7 @@ body{
     background-color: #008eb0;
 }
 .site-cnt-4{
-    background-color: #7ed714;
+    background-color: #7eab0d;
 }
 .site-cnt-5{
     background-color: #008eb0;
@@ -291,6 +290,9 @@ body{
 /* 网址添加 */
 .site-add .union-form{
     padding: 20px 0;
+}
+.site-add .site-logo img{
+    border: 1px solid #dbdbdb;
 }
 
 /* 网址标签添加 */

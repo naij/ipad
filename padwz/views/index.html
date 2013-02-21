@@ -1,26 +1,7 @@
-<div id="slider">
-    <% for(var i = 0, l = list.length; i < l; i++) { %>
-    <div class="site-cnt site-cnt-<%= i %>">
-        <div class="site-bd">
-            <div class="list-hd">
-                <h3><%= list[i].tag %></h3>
-            </div>
-            <ul class="clearfix">
-                <% for (var j = 0, l_s = list[i].site.length; j < l_s; j++) { %>
-                <li>
-                    <a href="<%= list[i].site[j].url %>" title="<%= list[i].site[j].title %>" target="_blank">
-                        <img src="<%= config.upyun_path %><%= list[i].site[j].img %>" alt="">
-                    </a>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-    <% } %>
-</div>
+<div id="slider"></div>
 
 <script type="text/javascript">
-    seajs.use(['./pc/components/site_scroll'], function(SiteScroll){
-        new SiteScroll();
+    seajs.use(['./pc/components/index_boot'], function(IndexBoot){
+        new IndexBoot();
     });
 </script>

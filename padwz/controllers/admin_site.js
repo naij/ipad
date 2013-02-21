@@ -132,7 +132,7 @@ exports.showSiteEdit = function(req, res, next) {
         if (err) {
             return next(err);
         }
-
+        console.log(doc);
         res.render('admin/site/site_edit',{
             site : doc.site[0],
             tid : tid,

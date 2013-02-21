@@ -1,5 +1,6 @@
 var util = require('../libs/util');
 var models = require('../models');
+var config = require('../config').config;
 var Site = models.Site;
 
 exports.index = function(req, res, next) {
@@ -11,23 +12,16 @@ exports.index = function(req, res, next) {
     }
     else{
         // pc端
-        Site.find().sort({order : 1}).exec(function(err, doc) {
-            res.render('index',{
-                list : doc 
-            });
-        });
+        res.render('index');
     }
-
-    // res.render('index_ipad', {
-    //     layout: 'layout_ipad'
-    // });
 };
 
 // 网址列表
 exports.list = function(req, res, next){
     Site.find().sort({order : 1}).exec(function(err, doc) {
         res.json({
-            data: doc
+            data: doc,
+            upyun_path : config.upyun_path
         });
     });
 }
