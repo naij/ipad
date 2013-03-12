@@ -1,0 +1,24 @@
+{   
+    "name": "index_boot",
+    "parent": "../package.json",
+    "description": "pc 端首页js",
+    "homepage": "",
+    "author": "kiwi",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
+    "license": "MIT",
+    "dependencies": {
+        "$" : "$",
+        "class" : "class",
+        "mousewheel" : "mousewheel"
+    },
+    "tests": ["index_boot"],
+    "output": {
+        "index_boot.js": "."
+    }
+}

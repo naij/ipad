@@ -1,0 +1,23 @@
+{
+    "name": "jquery-mousewheel",
+    "version": "3.1.0",
+    "root": "gallery",
+    "description": "",
+    "homepage": "",
+    "author": "brandonaaron",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/brandonaaron/jquery-mousewheel.git"
+    },
+    "bugs": {
+        "url": ""
+    },
+    "license": "MIT",
+    "dependencies": {
+        "$" : "$"
+    },
+    "tests": ["jquery-mousewheel"],
+    "output": {
+        "jquery-mousewheel.js": "."
+    }
+}

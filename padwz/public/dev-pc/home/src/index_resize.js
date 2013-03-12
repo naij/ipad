@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
     var $ = require('$');
     var Class = require('class');
-    var IndexScroll = require('./index_scroll');
+    var index_scroll = require('./index_scroll');
 
     var screenOptions = {
         'default': {"spacing": 25,"width": 260,"height": 160},
@@ -23,7 +23,7 @@ define(function(require, exports, module) {
         "1920*1080": {"spacing": 25,"width": 260,"height": 160}
     };
 
-    var Resize = Class.create({
+    var index_resize = Class.create({
         initialize : function() {
             var self = this;
             var winWidth = $(window).width();
@@ -91,9 +91,9 @@ define(function(require, exports, module) {
                 slider.append(siteCnt);
             });
 
-            new IndexScroll({height : containerHeight, length : panelLength});
+            new index_scroll({height : containerHeight, length : panelLength});
         }
     });
 
-    return Resize;
+    module.exports = index_resize;
 });

@@ -3,7 +3,7 @@ define(function(require, exports, module) {
     var $ = require('$');
     var Class = require('class');
 
-    var SiteScroll = Class.create({
+    var index_scroll = Class.create({
         initialize : function(options) {
             var self = this;
 
@@ -65,5 +65,5 @@ define(function(require, exports, module) {
         }
     });
 
-    return SiteScroll;
+    module.exports = index_scroll;
 });
