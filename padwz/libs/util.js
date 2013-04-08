@@ -46,8 +46,8 @@ exports.user_agent = function(req){
         "Ubuntu"
     ]
     var mobileUserAgents = [
-        "iPhone",//Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_1 like Mac OS X; zh-cn) AppleWebKit/532.9 (KHTML like Gecko) Mobile/8B117  
-        "iPad"//Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; zh-cn) AppleWebKit/531.21.10 (KHTML like Gecko) Version/4.0.4 Mobile/7B367 Safari/531.21.10  
+        "iPhone",
+        "iPad"
     ]
 
     var pcFlag = false;

@@ -14,6 +14,7 @@ exports.index = function(req, res, next) {
         // pc端
         res.render('index');
     }
+    
 };
 
 // 网址列表
