@@ -69,7 +69,6 @@ app.dynamicHelpers({
 // Routes
 routes(app);
 
-// app.listen(3000,"42.121.30.57");
-app.listen(3000);
+app.listen(config.port, config.server_ip);
 
 console.log("app start");

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var config = require('../config').config;
-var db = config.db();
+var db = config.db;
 
 mongoose.connect(db, function (err) {
     if (err) {
