@@ -18,13 +18,13 @@ app.configure(function(){
     app.set('view engine', 'html');
     app.register('.html', ejs);
     //app.set('view options', {layout: false});
-    app.use(express.logger({stream : accessLog}));
+    app.use(express.logger({stream: accessLog}));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
     app.use(express.session({
-        secret : config.session_secret
+        secret: config.session_secret
     }));
 
     // 用户登入校验中间件
@@ -34,7 +34,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions : true, showStack : true }));
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
@@ -48,14 +48,14 @@ app.configure('production', function(){
 
 // 视图助手
 app.helpers({
-    config : config
+    config: config
 });
 
 app.dynamicHelpers({
-    user : function(req,res){
+    user: function(req,res){
         return req.session.user;
     },
-    error : function(req,res){
+    error: function(req,res){
         var err = req.flash('error');
         if(err.length){
             return err;
